@@ -6,12 +6,16 @@ module.exports = function(app)
 
     var connectionString = 'mongodb://127.0.0.1:27017/test';
 
-    if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
-        connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-            process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+    //'mongodb://username:password@ds033076.mlab.com:33076/webdev-mayank';
+
+    if(process.env.MLAB_USERNAME) {
+        /*connectionString = "mongodb://"+ process.env.MLAB_USERNAME + ":" +
+            process.env.MLAB_PASSWORD + "@" +
             process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
             process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-            process.env.OPENSHIFT_APP_NAME;
+            process.env.OPENSHIFT_APP_NAME;*/
+
+        connectionString = 'mongodb://mayank:mayank@ds033076.mlab.com:33076/webdev-mayank';
     }
 
     var mongoose = require("mongoose");
