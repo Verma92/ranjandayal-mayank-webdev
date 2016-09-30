@@ -15,6 +15,15 @@ module.exports = function(app)
             process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
             process.env.OPENSHIFT_APP_NAME;*/
 
+
+        if(process.env.MLAB_USERNAME) {
+            connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+                process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+                process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+                process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+                process.env.OPENSHIFT_APP_NAME;
+        }
+
         connectionString = 'mongodb://mayank:mayank@ds033076.mlab.com:33076/webdev-mayank';
     }
 
