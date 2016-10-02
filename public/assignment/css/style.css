@@ -7,6 +7,10 @@ body{
     padding-bottom: 55px;
 }
 
+a:hover{
+    text-decoration: none;
+}
+
 .navbar-default{
     background-color: #337ab7;
 }
@@ -20,7 +24,7 @@ body{
 }
 
 #navbar-text-page-pages{
-    color: black;
+    color: gray;
 }
 
 .navbar-brand-page-pages{
