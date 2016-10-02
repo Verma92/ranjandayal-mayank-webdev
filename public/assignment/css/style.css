@@ -2,6 +2,33 @@ input.form-control {
     margin-bottom: 5px;
 }
 
-body {
-    padding-top: 36px;
+body{
+    padding-top: 50px;
+    padding-bottom: 55px;
 }
+
+.navbar-default{
+    background-color: #337ab7;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.glyphicon-ok:before {
+    color:white;
+    margin-right: 18px;
+}
+
+.glyphicon-chevron-left:before {
+    color:white;
+    margin-left: 18px;
+    margin-top: 15px;
+}
+
+.glyphicon-plus:before {
+    color:white;
+    margin-right: 18px;
+}
+
+
