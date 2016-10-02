@@ -3,7 +3,7 @@ input.form-control {
 }
 
 body{
-    padding-top: 50px;
+    padding-top: 55px;
     padding-bottom: 55px;
 }
 
@@ -11,8 +11,20 @@ body{
     background-color: #337ab7;
 }
 
+.navbar-page-pages{
+    background-color: whitesmoke;
+}
+
 .navbar-default .navbar-brand {
     color: white;
+}
+
+#navbar-text-page-pages{
+    color: black;
+}
+
+.navbar-brand-page-pages{
+    color: black;
 }
 
 .glyphicon-ok:before {
@@ -31,4 +43,33 @@ body{
     margin-right: 18px;
 }
 
+.glyphicon-user:before {
+    color:white;
+    margin-right: 18px;
+}
 
+.glyphicon-user-page-pages:before {
+    color:#337ab7;
+}
+
+.glyphicon-chevron-left-pages-page:before {
+    color:black;
+}
+
+.glyphicon-plus-pages-page:before {
+    color:black;
+}
+
+.glyphicon-cog:before {
+    margin-right: 18px;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #fff;
+    color: #337ab7;
+}
