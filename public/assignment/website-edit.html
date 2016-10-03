@@ -11,6 +11,53 @@
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
+        <div class="col-sm-4 hidden-xs">
+            <div class="navbar-header">
+                <p class="navbar-text pull-left">
+                    <a href="profile.html" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left pull-right"> </span>
+                    </a>
+                </p>
+
+                <a class="navbar-brand" href="#">
+                    Websites
+                </a>
+
+                <p class="navbar-text pull-right">
+                    <a href="website-new.html" class="navbar-link">
+                        <span class="glyphicon glyphicon-plus pull-right"> </span>
+                    </a>
+                </p>
+
+            </div>
+        </div>
+        <div class="col-sm-8">
+                    <div class="navbar-header">
+
+                        <p class="navbar-text pull-left">
+                            <a href="website-list.html" class="navbar-link">
+                                <span class="glyphicon glyphicon-chevron-left pull-right"> </span>
+                            </a>
+                        </p>
+
+                        <a class="navbar-brand" href="#">
+                            Edit Website
+                        </a>
+
+                        <p class="navbar-text pull-right">
+                            <a href="website-list.html" class="navbar-link">
+                                <span class="glyphicon glyphicon-ok pull-right"> </span>
+                            </a>
+                        </p>
+                    </div>
+        </div>
+    </div>
+</nav>
+
+<!-- NAVHEADER WEBSITE-EDIT
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
 
             <p class="navbar-text pull-left">
@@ -33,41 +80,97 @@
     </div>
 </nav>
 
-
-
-<div class="container">
-    <form>
-        <div class="form-group">
-            <label for="name">Website Name</label><br>
-            <input type="text" class="form-control" id="name" placeholder="Blogger">
-        </div>
-        <div class="form-group">
-            <label for="description">Website Description</label>
-            <textarea rows="5" class="form-control" id="description" placeholder="Description"></textarea>
-        </div>
-
-        <a class="btn btn-danger  btn-block"
-               href="website-list.html">Delete</a>
-
-
-    </form>
-</div>
-
-
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
+-->
+<div class="row">
+<div class="col-sm-4 hidden-xs">
     <div class="container-fluid">
-        <div class="navbar-footer">
+        <div class="navbar-header">
+            <div class="container-fluid">
+                <ul class="list-group ">
+                    <li class="list-group-item">
+                        <a href="website-edit.html" class="navbar-link">
+                            <span class="glyphicon glyphicon-cog pull-right"> </span>
+                        </a>
 
-            <p class="navbar-text pull-right">
-                <a href="profile.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-user pull-right"> </span>
-                </a>
-            </p>
+                        <a href="page-list.html" class="navbar-link">
+                            Address Book App
+                        </a>
 
+                    </li>
+
+                    <li class="list-group-item">
+                        <a href="website-edit.html" class="navbar-link">
+                            <span class="glyphicon glyphicon-cog pull-right"> </span>
+                        </a>
+
+                        <a href="page-list.html" class="navbar-link">
+                            Blogger
+                        </a>
+
+                    </li>
+
+                    <li class="list-group-item">
+                        <a href="website-edit.html" class="navbar-link">
+                            <span class="glyphicon glyphicon-cog pull-right"> </span>
+                        </a>
+
+                        <a href="page-list.html" class="navbar-link">
+                            Blogging App
+                        </a>
+
+                    </li>
+
+                    <li class="list-group-item">
+                        <a href="website-edit.html" class="navbar-link pull-right">
+                            <span class="glyphicon glyphicon-cog pull-right"> </span>
+                        </a>
+
+                        <a href="page-list.html" class="navbar-link">
+                            Script Testing App
+                        </a>
+
+                    </li>
+
+                </ul>
+            </div>
         </div>
     </div>
-</nav>
+</div>
+    <div class="col-sm-8">
+
+        <div class="container">
+            <form>
+                <div class="form-group">
+                    <label for="name">Website Name</label><br>
+                    <input type="text" class="form-control" id="name" placeholder="Blogger">
+                </div>
+                <div class="form-group">
+                    <label for="description">Website Description</label>
+                    <textarea rows="5" class="form-control" id="description" placeholder="Description"></textarea>
+                </div>
+
+                <a class="btn btn-danger  btn-block"
+                       href="website-list.html">Delete</a>
+
+
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-footer">
+
+                <p class="navbar-text pull-right">
+                    <a href="profile.html" class="navbar-link">
+                        <span class="glyphicon glyphicon-user pull-right"> </span>
+                    </a>
+                </p>
+
+            </div>
+        </div>
+    </nav>
 
 
 </body>
