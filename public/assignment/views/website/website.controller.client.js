@@ -8,9 +8,12 @@
         .controller("NewWebsiteController", NewWebsiteController)
         .controller("WebsiteListController", WebsiteListController);
 
-        function EditWebsiteController() {  }
+        function EditWebsiteController() {
+            var vm = this;
+        }
         function WebsiteListController($scope)
             {
+                var vm = this;
                 //console.log("Hello from websitelist controller !");
 
                 var websites = [
@@ -26,6 +29,7 @@
 
 
         function NewWebsiteController() {
+            var vm = this;
 
         }
 })();

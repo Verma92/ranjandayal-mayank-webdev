@@ -13,39 +13,53 @@
                     ];
 
         var api = {
-            findUsersByCredentials: findUsersByCredentials
+            findUsersByCredentials: findUserByCredentials,
+            createUser: createUser,
+            findUserById: findUserById,
+            findUserByUsername: findUserByUsername,
+            findUserByCredentials: findUserByCredentials,
+            updateUser: updateUser,
+            deleteUser: deleteUser
         };
 
         return api;
 
-        function findUsersByCredentials(username, password){
+        function createUser(user){
+
+        }
+
+        function findUserById(userId){
             for (var u in users) {
                 user = users[u];
-                if(user.username === username && user.password === password){
-                   return user;
+                if(parseInt(user._id) === userId) {
+                    return user;
                 }
             }
             return null;
         }
 
+        function findUserByUsername(username){
+
+        }
+
+        function findUserByCredentials(username, password){
+            for (var u in users) {
+                user = users[u];
+                if(user.username === username && user.password === password){
+                    return user;
+                }
+            }
+            return null;
+        }
+
+        function updateUser(userId, user){
+
+        }
+
+        function deleteUser(userId){
+
+        }
+
     }
 
 })();
-/*
-(function() {
-    angular
-        .module("WebAppMaker")
-        .factory("UserService", UserService);
-    function UserService() {
-        var users = [ ... ];
-        var api = {
-            "createUser"   : "createUser",
-            "findUserById" : "findUserById",
-            ...
-    };
-        return api;
-        function createUser(user) { ... }
-        function findUserById(id) { ... }
-    ...
-    }
-})();*/

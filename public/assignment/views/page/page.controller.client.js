@@ -8,7 +8,13 @@
         .controller("NewPageController", NewPageController)
         .controller("PageListController", PageListController);
 
-    function EditPageController() {  }
-    function NewPageController() {  }
-    function PageListController() {  }
+    function EditPageController() {
+        var vm = this;
+    }
+    function NewPageController() {
+        var vm = this;
+    }
+    function PageListController() {
+        var vm = this;
+    }
 })();

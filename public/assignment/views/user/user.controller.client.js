@@ -26,11 +26,16 @@
 
     }
 
-    function RegisterController($scope) {
+    function RegisterController() {
+        var vm = this;
 
     }
 
-    function ProfileController($scope) {
+    function ProfileController($routeParams, UserService) {
+        var vm = this;
+        var userId = parseInt($routeParams.uid);
+        var user = UserService.findUserById(userId);
+        vm.user = user;
 
     };
 

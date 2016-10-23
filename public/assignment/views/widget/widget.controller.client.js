@@ -13,9 +13,15 @@
         .controller("WidgetChooseController", WidgetChooseController)
         .controller("WidgetYoutubeController", WidgetYoutubeController);*/
 
-    function WidgetListController() {  }
-    function NewWidgetController() {  }
-    function EditWidgetController() {  }
+    function WidgetListController() {
+        var vm = this;
+    }
+    function NewWidgetController() {
+        var vm = this;
+    }
+    function EditWidgetController() {
+        var vm = this;
+    }
 /*    function WidgetChooseController() {  }
     function WidgetYoutubeController() {  }*/
 })();
