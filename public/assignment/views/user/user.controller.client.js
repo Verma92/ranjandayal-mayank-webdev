@@ -9,9 +9,20 @@
         .controller("RegisterController", RegisterController)
         .controller("ProfileController", ProfileController);
 
-    function LoginController($scope) {
+    function LoginController($location, UserService) {
 
-        $scope.hello = "hello from login controller";
+        var vm = this;
+        vm.login = login;
+
+        function login(username, password) {
+            var user = UserService.findUsersByCredentials(username, password);
+            if(user === null) {
+                vm.error = "No such user !";
+            } else {
+                $location.url("/user/" + user._id);
+            }
+
+        }
 
     }
 

@@ -35,7 +35,19 @@
                 controllerAs: "model"
             })
 
+            .when("/user/:uid", {
+                templateUrl: "/assignment/views/user/profile.view.client.html",
+                controller: "ProfileController",
+                controllerAs: "model"
+            })
+
             .when("/page-edit", {
+                templateUrl: "/assignment/views/page/page-edit.view.client.html",
+                controller: "EditPageController",
+                controllerAs: "model"
+            })
+
+            .when("/user/:uid/website/:wid/page/:pid", {
                 templateUrl: "/assignment/views/page/page-edit.view.client.html",
                 controller: "EditPageController",
                 controllerAs: "model"
@@ -47,7 +59,19 @@
                 controllerAs: "model"
             })
 
+            .when("/user/:uid/website/:wid/page", {
+                templateUrl: "/assignment/views/page/page-list.view.client.html",
+                controller: "ListPageController",
+                controllerAs: "model"
+            })
+
             .when("/page-new", {
+                templateUrl: "/assignment/views/page/page-new.view.client.html",
+                controller: "NewPageController",
+                controllerAs: "model"
+            })
+
+            .when("/user/:uid/website/:wid/page/new", {
                 templateUrl: "/assignment/views/page/page-new.view.client.html",
                 controller: "NewPageController",
                 controllerAs: "model"
@@ -59,13 +83,31 @@
                 controllerAs: "model"
             })
 
+            .when("/user/:uid/website/new", {
+                templateUrl: "/assignment/views/website/website-new.view.client.html",
+                controller: "NewWebsiteController",
+                controllerAs: "model"
+            })
+
             .when("/website-list", {
                 templateUrl: "/assignment/views/website/website-list.view.client.html",
                 controller: "WebsiteListController",
                 controllerAs: "model"
             })
 
+            .when("/user/:uid/website", {
+                templateUrl: "/assignment/views/website/website-list.view.client.html",
+                controller: "WebsiteListController",
+                controllerAs: "model"
+            })
+
             .when("/website-edit", {
+                templateUrl: "/assignment/views/website/website-edit.view.client.html",
+                controller: "EditWebsiteController",
+                controllerAs: "model"
+            })
+
+            .when("/user/:uid/website/:wid", {
                 templateUrl: "/assignment/views/website/website-edit.view.client.html",
                 controller: "EditWebsiteController",
                 controllerAs: "model"
@@ -84,6 +126,12 @@
                 controllerAs: "model"
             })
 
+            .when("/user/:uid/website/:wid/page/:pid/widget/new", {
+                templateUrl: "/assignment/views/widget/widget-choose.view.client.html",
+                controller: "NewWidgetController",
+                controllerAs: "model"
+            })
+
             .when("/widget-heading", {
                 templateUrl: "/assignment/views/widget/widget-heading.view.client.html",
                 controller: "EditWidgetController",
@@ -96,7 +144,7 @@
                 controllerAs: "model"
             })
 
-            .when("/widget-list", {
+            .when("/user/:uid/website/:wid/page/:pid/widget", {
                 templateUrl: "/assignment/views/widget/widget-list.view.client.html",
                 controller: "WidgetListController",
                 controllerAs: "model"
@@ -104,11 +152,11 @@
 
             .when("/website/:wid", {
                 templateUrl: "/assignment/views/website/website-edit.view.client.html"
-            });
-/*
+            })
+
             .otherwise({
                 redirectTo: "/login"
-            });*/
+            });
 
     }
 })();
