@@ -9,6 +9,23 @@
         .controller("WebsiteListController", WebsiteListController);
 
         function EditWebsiteController() {  }
-        function WebsiteListController() {  }
-        function NewWebsiteController() {  }
+        function WebsiteListController($scope)
+            {
+                //console.log("Hello from websitelist controller !");
+
+                var websites = [
+                    {"name": "Facebook", "description": "Most popular socia network"},
+                    {"name": "Wikipedia", "description": "The free encylopedia"}
+                ];
+
+                $scope.weblist = websites;
+
+
+
+            }
+
+
+        function NewWebsiteController() {
+
+        }
 })();
