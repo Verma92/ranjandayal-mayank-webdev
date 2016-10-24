@@ -14,9 +14,6 @@
             { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" }
         ];
 
-
-
-
         var api = {
             createWebsite: createWebsite,
             findWebsitesByUser: findWebsitesByUser,
@@ -43,8 +40,15 @@
         }
 
         function findWebsiteById(websiteId) {
-
-
+            console.log(websiteId);
+            for (var w in websites) {
+                website = websites[w];
+                console.log(website);
+                if(parseInt(website._id) === parseInt(websiteId)) {
+                    return website;
+                }
+            }
+            return null;
         }
 
         function updateWebsite(websiteId, website) {

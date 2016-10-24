@@ -8,26 +8,29 @@
         .controller("NewWebsiteController", NewWebsiteController)
         .controller("WebsiteListController", WebsiteListController);
 
-        function EditWebsiteController() {
+        function EditWebsiteController($routeParams, WebsiteService) {
             var vm = this;
-            var userId = parseInt($routeParams.uid);
-            var user = UserService.findUserById(userId);
-            vm.user = user;
+            var websiteId = $routeParams.wid;
+            var website = WebsiteService.findWebsiteById(websiteId);
+            vm.website = website;
 
-
-
+/*            var websites = WebsiteService.findWebsitesByUser(userId);
+            vm.websites = websites;*/
         }
+
         function WebsiteListController($routeParams, WebsiteService) {
             var vm = this;
             var userId = $routeParams.uid;
             var websites = WebsiteService.findWebsitesByUser(userId);
             vm.websites = websites;
-            console.log(websites);
+            vm.userId = userId;
         }
 
-
-        function NewWebsiteController() {
+        function NewWebsiteController($routeParams, WebsiteService) {
             var vm = this;
-
+            var userId = $routeParams.uid;
+            var websites = WebsiteService.findWebsitesByUser(userId);
+            vm.websites = websites;
+            vm.userId = userId;
         }
 })();
