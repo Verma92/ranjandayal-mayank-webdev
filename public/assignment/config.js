@@ -61,7 +61,7 @@
 
             .when("/user/:uid/website/:wid/page", {
                 templateUrl: "/assignment/views/page/page-list.view.client.html",
-                controller: "ListPageController",
+                controller: "PageListController",
                 controllerAs: "model"
             })
 

@@ -27,18 +27,17 @@
 <div class="container-fluid">
 
         <ul class="list-group">
-            <li class="list-group-item">
-                <a href="#page-edit" class="navbar-link">
+
+            <li ng-repeat = "page in model.pages" class="list-group-item">
+                <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}" class="navbar-link">
                     <span class="glyphicon glyphicon-cog pull-right"> </span>
                 </a>
                 <a href="#widget-list" class="navbar-link">
-                    Blog Post
+                    {{page.name}}
                 </a>
-
-
             </li>
 
-            <li class="list-group-item">
+           <!-- <li class="list-group-item">
                 <a href="#page-edit" class="navbar-link">
                     <span class="glyphicon glyphicon-cog pull-right"> </span>
                 </a>
@@ -81,7 +80,7 @@
                 </a>
 
 
-            </li>
+            </li>-->
 
         </ul>
 </div>

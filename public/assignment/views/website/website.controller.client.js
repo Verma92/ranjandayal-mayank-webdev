@@ -10,12 +10,16 @@
 
         function EditWebsiteController($routeParams, WebsiteService) {
             var vm = this;
+            var userId = $routeParams.uid;
             var websiteId = $routeParams.wid;
+
             var website = WebsiteService.findWebsiteById(websiteId);
             vm.website = website;
-
-/*            var websites = WebsiteService.findWebsitesByUser(userId);
-            vm.websites = websites;*/
+            var websites = WebsiteService.findWebsitesByUser(userId);
+            vm.websites = websites;
+            console.log(websites);
+            console.log(website);
+            vm.userId = userId;
         }
 
         function WebsiteListController($routeParams, WebsiteService) {
