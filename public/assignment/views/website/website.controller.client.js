@@ -10,22 +10,20 @@
 
         function EditWebsiteController() {
             var vm = this;
+            var userId = parseInt($routeParams.uid);
+            var user = UserService.findUserById(userId);
+            vm.user = user;
+
+
+
         }
-        function WebsiteListController($scope)
-            {
-                var vm = this;
-                //console.log("Hello from websitelist controller !");
-
-                var websites = [
-                    {"name": "Facebook", "description": "Most popular socia network"},
-                    {"name": "Wikipedia", "description": "The free encylopedia"}
-                ];
-
-                $scope.weblist = websites;
-
-
-
-            }
+        function WebsiteListController($routeParams, WebsiteService) {
+            var vm = this;
+            var userId = $routeParams.uid;
+            var websites = WebsiteService.findWebsitesByUser(userId);
+            vm.websites = websites;
+            console.log(websites);
+        }
 
 
         function NewWebsiteController() {

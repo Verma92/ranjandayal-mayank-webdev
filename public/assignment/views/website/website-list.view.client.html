@@ -20,20 +20,18 @@
     </div>
 </nav>
 
-{{weblist}}
-
 <div class="container">
     <ul class="list-group">
-        <li class="list-group-item">
+        <li ng-repeat = "website in model.websites" class="list-group-item">
             <a href="#page-list">
-                Address Book App
+                {{website.name}}
             </a>
             <a href="#website-edit" class="pull-right">
                 <span class="glyphicon glyphicon-cog pull-right"> </span>
             </a>
         </li>
 
-        <li class="list-group-item">
+       <!-- <li class="list-group-item">
             <a href="#page-list">
                 Blogger
             </a>
@@ -59,7 +57,7 @@
                 <span class="glyphicon glyphicon-cog pull-right"> </span>
             </a>
         </li>
-
+-->
     </ul>
 </div>
 

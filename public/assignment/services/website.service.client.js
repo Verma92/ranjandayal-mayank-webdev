@@ -5,7 +5,7 @@
 
     function WebsiteService(){
 
-        var users =   [
+        var websites =   [
             { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
             { "_id": "234", "name": "Tweeter",     "developerId": "456", "description": "Lorem" },
             { "_id": "456", "name": "Gizmodo",     "developerId": "456", "description": "Lorem" },
@@ -19,7 +19,7 @@
 
         var api = {
             createWebsite: createWebsite,
-            createWebsite: createWebsite,
+            findWebsitesByUser: findWebsitesByUser,
             findWebsiteById: findWebsiteById,
             updateWebsite: updateWebsite,
             deleteWebsite: deleteWebsite
@@ -31,11 +31,19 @@
 
         }
 
-        function createWebsite(userId){
-
+        function findWebsitesByUser(userId) {
+            var result = [];
+            for (var w in websites) {
+                website = websites[w];
+                if(parseInt(website._id) === parseInt(userId)) {
+                    result.push(website);
+                }
+            }
+            return result;
         }
 
         function findWebsiteById(websiteId) {
+
 
         }
 
