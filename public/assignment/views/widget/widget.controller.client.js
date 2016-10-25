@@ -41,9 +41,19 @@
     }
 
 
+    function NewWidgetController($routeParams, WidgetService) {
 
-    function NewWidgetController() {
         var vm = this;
+
+        function init() {
+
+            vm.widgetTypes = WidgetService.getAllWidgetTypes();
+            vm.createWidget = WidgetService.createWidget();
+            console.log("inside NewWidgetControllerInit");
+
+        }
+        init();
+
     }
 
     function EditWidgetController($routeParams, WidgetService, $sce) {
@@ -52,6 +62,9 @@
 
         function init() {
 
+            vm.userId=$routeParams.uid;
+            vm.websiteId=$routeParams.wid;
+            vm.pageId=$routeParams.pid;
             vm.widget=WidgetService.findWidgetById($routeParams.wgid);
             vm.getFilenamePrefix = getFilenamePrefix;
             console.log("inside EditWidgetController");

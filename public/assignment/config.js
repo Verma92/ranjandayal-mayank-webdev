@@ -123,13 +123,13 @@
             })
 
             .when("/widget-choose", {
-                templateUrl: "/assignment/views/widget/widget-choose.view.client.html",
+                templateUrl: "/assignment/views/widget/widget-chooser.view.client.html",
                 controller: "NewWidgetController",
                 controllerAs: "model"
             })
 
             .when("/user/:uid/website/:wid/page/:pid/widget/new", {
-                templateUrl: "/assignment/views/widget/widget-choose.view.client.html",
+                templateUrl: "/assignment/views/widget/widget-chooser.view.client.html",
                 controller: "NewWidgetController",
                 controllerAs: "model"
             })

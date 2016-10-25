@@ -22,13 +22,19 @@
             "IMAGE": "image",
             "YOUTUBE": "youtube" };
 
+        var widgetTypes = [ "HEADER",
+                            "IMAGE",
+                            "HTML",
+                            "YOUTUBE" ];
+
         var api = {
-            createWidget:createWidget,
+            createWidget: createWidget,
             findWidgetsByPageId: findWidgetsByPageId,
             findWidgetById: findWidgetById,
             updateWidget: updateWidget,
             deleteWidget: deleteWidget,
-            getFilenamePrefix: getFilenamePrefix
+            getFilenamePrefix: getFilenamePrefix,
+            getAllWidgetTypes: getAllWidgetTypes
         };
 
         return api;
@@ -57,7 +63,6 @@
                 }
             }
             return null;
-
         }
 
         function updateWidget(widgetId, widget) {
@@ -70,6 +75,11 @@
 
         function getFilenamePrefix(widgetType) {
             return filenamePrefixes[widgetType];
+        }
+
+        function getAllWidgetTypes() {
+            console.log("inside getAllWidgetTypes");
+            return widgetTypes;
         }
     }
 

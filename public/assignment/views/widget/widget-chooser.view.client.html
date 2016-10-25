@@ -3,7 +3,7 @@
         <div class="navbar-header">
 
             <p class="navbar-text pull-left ">
-                <a href="#" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left glyphicon-chevron-left-pages-page pull-right"> </span>
                 </a>
             </p>
@@ -21,11 +21,15 @@
     <div class="navbar-header">
 
         <ul class="list-group">
-            <li class="list-group-item">
-                Header
+            <li ng-repeat="widgetType in model.widgetTypes"
+                class="list-group-item"
+                ng-click="model.createWidget(widgetType)"/>
+
+                    {{widgetType}}
+
             </li>
 
-            <li class="list-group-item">
+    <!--        <li class="list-group-item">
                 Label
             </li>
 
@@ -59,7 +63,7 @@
 
             <li class="list-group-item">
                 Repeater
-            </li>
+            </li>-->
 
         </ul>
     </div>
@@ -70,7 +74,7 @@
         <div class="navbar-footer">
 
             <p class="navbar-text pull-right">
-                <a href="#profile" class="navbar-link">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
                     <span class="glyphicon glyphicon-user glyphicon-user-page-pages"> </span>
                 </a>
             </p>
