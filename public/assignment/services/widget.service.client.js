@@ -17,12 +17,18 @@
                 { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
             ];
 
+        var filenamePrefixes = { "HEADER": "heading",
+            "HTML": "html",
+            "IMAGE": "image",
+            "YOUTUBE": "youtube" };
+
         var api = {
             createWidget:createWidget,
             findWidgetsByPageId: findWidgetsByPageId,
             findWidgetById: findWidgetById,
             updateWidget: updateWidget,
-            deleteWidget: deleteWidget
+            deleteWidget: deleteWidget,
+            getFilenamePrefix: getFilenamePrefix
         };
 
         return api;
@@ -44,6 +50,14 @@
 
         function findWidgetById(widgetId) {
 
+            for (var w in widgets) {
+                widget = widgets[w];
+                if(parseInt(widget._id) === parseInt(widgetId)) {
+                    return widget;
+                }
+            }
+            return null;
+
         }
 
         function updateWidget(widgetId, widget) {
@@ -52,6 +66,10 @@
 
         function deleteWidget(widgetId) {
 
+        }
+
+        function getFilenamePrefix(widgetType) {
+            return filenamePrefixes[widgetType];
         }
     }
 

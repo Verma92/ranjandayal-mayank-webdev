@@ -16,7 +16,9 @@
             })
 
             .when("/", {
-                templateUrl: "/assignment/views/user/login.view.client.html"
+                templateUrl: "/assignment/views/user/login.view.client.html",
+                controller: "LoginController",
+                controllerAs: "model"
             })
 
             .when("default", {
@@ -147,6 +149,12 @@
             .when("/user/:uid/website/:wid/page/:pid/widget", {
                 templateUrl: "/assignment/views/widget/widget-list.view.client.html",
                 controller: "WidgetListController",
+                controllerAs: "model"
+            })
+
+            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
+                templateUrl: "/assignment/views/widget/widget-edit.view.client.html",
+                controller: "EditWidgetController",
                 controllerAs: "model"
             })
 

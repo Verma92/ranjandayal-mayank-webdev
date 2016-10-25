@@ -25,5 +25,6 @@
         var pages = PageService.findPageByWebsiteId(websiteId);
         vm.pages = pages;
         vm.userId = userId;
+        vm.websiteId = websiteId;
     }
 })();
