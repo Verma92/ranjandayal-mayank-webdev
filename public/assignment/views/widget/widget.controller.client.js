@@ -37,9 +37,7 @@
             return $sce.trustAsResourceUrl(url);
         }
 
-
     }
-
 
     function NewWidgetController($routeParams, WidgetService) {
 
@@ -53,7 +51,6 @@
 
         }
         init();
-
     }
 
     function EditWidgetController($routeParams, WidgetService, $sce) {
@@ -76,8 +73,6 @@
             console.log("inside filename prefix");
             return WidgetService.getFilenamePrefix(vm.widget.widgetType);
         }
-
-
     }
 /*    function WidgetChooseController() {  }
     function WidgetYoutubeController() {  }*/

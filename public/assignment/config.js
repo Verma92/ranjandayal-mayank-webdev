@@ -161,10 +161,10 @@
             .when("/website/:wid", {
                 templateUrl: "/assignment/views/website/website-edit.view.client.html"
             })
-/*
+
             .otherwise({
                 redirectTo: "/login"
-            });*/
+            });
 
     }
 })();

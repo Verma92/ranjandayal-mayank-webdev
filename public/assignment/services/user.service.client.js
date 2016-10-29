@@ -25,7 +25,18 @@
         return api;
 
         function createUser(user){
-
+            var userId;
+            do {
+                userId = getRandomInt(0, 1000).toString();
+                if (findUserById(userId) === null)
+                {
+                    user._id = userId;
+                    users.push(user);
+                    for(i = 0; i < users.length; i++)
+                        console.log(users[i]);
+                    return user;
+                }
+            } while(1);
         }
 
         function findUserById(userId){
@@ -53,11 +64,35 @@
         }
 
         function updateUser(userId, user){
-
+            var userIndex = findUserIndexById(userId);
+            if( userIndex === -1)
+            {
+                return null;
+            }
+            else
+            {
+                users[userIndex] = user;
+                return users[userIndex];
+            }
         }
 
         function deleteUser(userId){
 
+        }
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        function findUserIndexById(userId) {
+            for(var i = 0; i < users.length; i++)
+            {
+                if( users[i]._id === userId)
+                    return i;
+            }
+            return -1;
         }
 
     }

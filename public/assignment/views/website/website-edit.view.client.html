@@ -4,19 +4,19 @@
         <div class="col-sm-4 hidden-xs">
 
             <p class="navbar-text pull-left">
-                <a href="#profile" class="navbar-link">
+                <a href="#user/{{model.userId}}/website" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left pull-right"> </span>
                 </a>
             </p>
 
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="#user/{{model.userId}}/website">
                     Websites
                 </a>
             </div>
 
             <p class="navbar-text pull-right">
-                <a href="#website-new" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/new" class="navbar-link">
                     <span class="glyphicon glyphicon-plus pull-right"> </span>
                 </a>
             </p>
@@ -32,12 +32,12 @@
                 </p>
 
                 <p class="navbar-text pull-right">
-                    <a href="#website-list" class="navbar-link">
+                    <a ng-click="model.updateWebsite(model.website)" class="navbar-link">
                         <span class="glyphicon glyphicon-ok"> </span>
                     </a>
                 </p>
 
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="#user/{{model.userId}}/website/{{model.websiteId}}">
                     Edit Website
                 </a>
 
@@ -80,8 +80,7 @@
                     <textarea ng-model="model.website.description" rows="5" class="form-control" id="description" placeholder="Description"></textarea>
                 </div>
 
-                <a class="btn btn-danger  btn-block"
-                   href="#website-list">Delete</a>
+                <a ng-click="model.deleteWebsite()" class="btn btn-danger btn-block">Delete</a>
 
 
             </form>
@@ -95,7 +94,7 @@
         <div class="navbar-footer">
 
             <p class="navbar-text pull-right">
-                <a href="#profile" class="navbar-link">
+                <a href="#user/{{model.userId}}" class="navbar-link">
                     <span class="glyphicon glyphicon-user pull-right"> </span>
                 </a>
             </p>

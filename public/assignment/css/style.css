@@ -42,6 +42,7 @@ a:hover{
 .glyphicon-ok:before {
     color:white;
     margin-right: 18px;
+    cursor: pointer;
 }
 
 .glyphicon-chevron-left:before {

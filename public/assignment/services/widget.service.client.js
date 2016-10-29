@@ -39,8 +39,19 @@
 
         return api;
 
-        function createWidget(pageId, widget) {
-
+        function createWidget(pageId, widget)
+        {
+            widget.pageId = pageId;
+            var newWid;
+            do {
+                newWid = getRandomInt(0, 1000).toString();
+                if (findWidgetById(newWid) === undefined)
+                {
+                    widget._id = newWid;
+                    widgets.push(widget);
+                    return widget;
+                }
+            }while(1);
         }
 
         function findWidgetsByPageId(pageId) {
@@ -80,6 +91,12 @@
         function getAllWidgetTypes() {
             console.log("inside getAllWidgetTypes");
             return widgetTypes;
+        }
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
         }
     }
 
