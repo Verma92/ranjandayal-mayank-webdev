@@ -27,6 +27,13 @@
                             "HTML",
                             "YOUTUBE" ];
 
+        var defaultWidgetValues =
+        {
+            "HEADER": {"size":1},
+            "IMAGE": {"width": "100%"},
+            "YOUTUBE": {"width": "100%"}
+        };
+
         var api = {
             createWidget: createWidget,
             findWidgetsByPageId: findWidgetsByPageId,
@@ -34,7 +41,8 @@
             updateWidget: updateWidget,
             deleteWidget: deleteWidget,
             getFilenamePrefix: getFilenamePrefix,
-            getAllWidgetTypes: getAllWidgetTypes
+            getAllWidgetTypes: getAllWidgetTypes,
+            getDefaultWidgetValues: getDefaultWidgetValues
         };
 
         return api;
@@ -45,13 +53,13 @@
             var newWid;
             do {
                 newWid = getRandomInt(0, 1000).toString();
-                if (findWidgetById(newWid) === undefined)
+                if (findWidgetById(newWid) === null)
                 {
                     widget._id = newWid;
                     widgets.push(widget);
                     return widget;
                 }
-            }while(1);
+            } while(1);
         }
 
         function findWidgetsByPageId(pageId) {
@@ -97,6 +105,11 @@
             min = Math.ceil(min);
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        function getDefaultWidgetValues()
+        {
+            return defaultWidgetValues;
         }
     }
 

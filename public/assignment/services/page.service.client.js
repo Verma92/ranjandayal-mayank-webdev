@@ -22,7 +22,17 @@
         return api;
 
         function createPage(websiteId, page) {
-
+            page.websiteId = websiteId;
+            var newPid;
+            do {
+                newPid = getRandomInt(0, 1000).toString();
+                if (findPageById(newPid) === null)
+                {
+                    page._id = newPid;
+                    pages.push(page);
+                    return page;
+                }
+            }while(1);
         }
 
         function findPageByWebsiteId(websiteId) {
@@ -53,11 +63,44 @@
         }
 
         function updatePage(pageId, page) {
-
+            var pageIndex = findPageIndexById(pageId);
+            if(pageIndex === -1)
+            {
+                return null;
+            }
+            else
+            {
+                pages[pageIndex] = page;
+                return pages[pageIndex];
+            }
         }
 
         function deletePage(pageId) {
+            var pageIndex = findPageIndexById(pageId);
+            if(pageIndex === -1)
+            {
+                return false;
+            }
+            else
+            {
+                pages.splice(pageIndex, 1);
+                return true;
+            }
+        }
 
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        function findPageIndexById(pageId) {
+            for(var i = 0; i < pages.length; i++)
+            {
+                if( pages[i]._id === pageId)
+                    return i;
+            }
+            return -1;
         }
     }
 

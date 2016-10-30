@@ -49,6 +49,12 @@
                 controllerAs: "model"
             })
 
+            .when("/user/:uid/website/:wid/page/new", {
+                templateUrl: "/assignment/views/page/page-new.view.client.html",
+                controller: "NewPageController",
+                controllerAs: "model"
+            })
+
             .when("/user/:uid/website/:wid/page/:pid", {
                 templateUrl: "/assignment/views/page/page-edit.view.client.html",
                 controller: "EditPageController",
@@ -73,11 +79,6 @@
                 controllerAs: "model"
             })
 
-            .when("/user/:uid/website/:wid/page/new", {
-                templateUrl: "/assignment/views/page/page-new.view.client.html",
-                controller: "NewPageController",
-                controllerAs: "model"
-            })
 
             .when("/website-new", {
                 templateUrl: "/assignment/views/website/website-new.view.client.html",

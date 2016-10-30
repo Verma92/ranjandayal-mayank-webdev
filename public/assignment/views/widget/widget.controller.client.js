@@ -39,18 +39,42 @@
 
     }
 
-    function NewWidgetController($routeParams, WidgetService) {
+    function NewWidgetController($routeParams, WidgetService, $location) {
 
         var vm = this;
+        var userId = $routeParams.uid;
+        var pageId = $routeParams.pid;
 
         function init() {
 
+            vm.pageId = pageId;
+            vm.userId = userId;
+            vm.websiteId=$routeParams.wid;
             vm.widgetTypes = WidgetService.getAllWidgetTypes();
-            vm.createWidget = WidgetService.createWidget();
+            vm.createWidget = createWidget;
             console.log("inside NewWidgetControllerInit");
 
         }
         init();
+
+        function createWidget(widgetType) {
+
+            var widget = {"widgetType": widgetType};
+            var allDefaultWidgetValues = WidgetService.getDefaultWidgetValues();
+            var defaultWidgetValues = allDefaultWidgetValues[widgetType];
+            console.log(defaultWidgetValues);
+            if( undefined !== defaultWidgetValues)
+            {
+                for (var key in defaultWidgetValues)
+                {
+                    widget[key] = defaultWidgetValues[key];
+                }
+            }
+            console.log(widget);
+
+            var newWidget = WidgetService.createWidget(vm.pageId, widget);
+            $location.url("/user/" + vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + newWidget._id);
+        }
     }
 
     function EditWidgetController($routeParams, WidgetService, $sce) {

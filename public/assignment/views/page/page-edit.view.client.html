@@ -3,17 +3,18 @@
         <div class="navbar-header complete-width">
 
             <p class="navbar-text pull-left ">
-                <a href="#profile" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left glyphicon-chevron-left-pages-page"> </span>
                 </a>
             </p>
 
-            <a class="navbar-brand" id="navbar-text-page-pages" href="#">
+            <a class="navbar-brand" id="navbar-text-page-pages"
+               href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}">
                 Edit Page
             </a>
 
             <p class="navbar-text pull-right ">
-                <a href="#profile" class="navbar-link">
+                <a ng-click="model.updatePage()" class="navbar-link">
                     <span class="glyphicon glyphicon-ok glyphicon-plus-pages-page"> </span>
                 </a>
             </p>
@@ -27,16 +28,15 @@
 
         <div class="form-group">
             <label for="blogpost">Blog Post</label>
-            <input ng-model="model.page.description" type="text" class="form-control" id="blogpost" placeholder="Blog Post">
+            <input ng-model="model.page.name" type="text" class="form-control" id="blogpost" placeholder="Blog Post">
         </div>
 
         <div class="form-group">
             <label for="title">Title</label>
-            <input ng-model="model.page.name" type="text" class="form-control" id="title" placeholder="Page Title">
+            <input ng-model="model.page.description" type="text" class="form-control" id="title" placeholder="Page Title">
         </div>
 
-        <a class="btn btn-danger  btn-block"
-           href="#profile">Delete</a>
+        <a ng-click="model.deletePage()" class="btn btn-danger  btn-block">Delete</a>
 
     </form>
 </div>
@@ -47,7 +47,7 @@
         <div class="navbar-footer">
 
             <p class="navbar-text pull-right">
-                <a href="#profile" class="navbar-link">
+                <a href="#user/{{model.userId}}" class="navbar-link">
                     <span class="glyphicon glyphicon-user glyphicon-user-page-pages pull-right"> </span>
                 </a>
             </p>
