@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .factory("PageService", PageService)
 
-    function PageService(){
+    function PageService($http){
 
         var pages =  [
             { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
