@@ -1,7 +1,9 @@
 
     <div class="container">
 
-        {{model.alert}}
+        <div ng-show="model.alert" class="alert alert-danger" role="alert">
+            {{model.alert}}
+        </div>
 
         <h1>Register</h1>
 

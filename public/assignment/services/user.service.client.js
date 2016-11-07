@@ -39,6 +39,7 @@
         function findUserById(userId)
         {
             var url = '/api/user/' + userId;
+            console.log(url);
             return $http.get(url);
         }
 
@@ -56,9 +57,13 @@
         }
 
 
+        function updateUser(userId, user)
+        {
 
-        function updateUser(userId, user){
-            var userIndex = findUserIndexById(userId);
+            var url = '/api/user/' + userId;
+            return $http.put(url, user);
+
+            /*var userIndex = findUserIndexById(userId);
             if( userIndex === -1)
             {
                 return null;
@@ -67,7 +72,7 @@
             {
                 users[userIndex] = user;
                 return users[userIndex];
-            }
+            }*/
         }
 
         function deleteUser(userId){

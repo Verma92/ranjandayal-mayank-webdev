@@ -23,7 +23,8 @@ module.exports = function(app) {
     app.get('/api/user', findUser);
 
 
-    function unregisterUser(req, res) {
+    function unregisterUser(req, res)
+    {
         var uid = req.params.uid;
         for(var u in users) {
             if(users[u]._id == uid) {
@@ -33,7 +34,8 @@ module.exports = function(app) {
         res.send(200);
     }
 
-    function updateUser(req, res) {
+    function updateUser(req, res)
+    {
         var user = req.body;
         var uid = req.params.uid;
         for(var u in users) {
@@ -41,6 +43,7 @@ module.exports = function(app) {
                 users[u] = user;
             }
         }
+        console.log(users);
         res.send(200);
     }
 
@@ -110,7 +113,7 @@ module.exports = function(app) {
     function findUserById(req, res) {
         var userId = parseInt(req.params.uid);
         for(var u in users) {
-            if(users[u]._id === userId) {
+            if(parseInt(users[u]._id) === userId) {
                 res.send(users[u]);
                 return;
             }

@@ -1,6 +1,8 @@
 <div class="container">
 
-        {{model.alert}}
+        <div ng-show="model.alert" class="alert alert-danger" role="alert">
+                {{model.alert}}
+        </div>
 
         <h1>Login</h1>
         <input type="text"

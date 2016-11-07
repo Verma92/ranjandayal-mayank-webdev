@@ -43,16 +43,34 @@
 
         }
 
-        function WebsiteListController($routeParams, WebsiteService) {
+        function WebsiteListController($routeParams, WebsiteService)
+        {
             var vm = this;
             var userId = $routeParams.uid;
-            var websites = WebsiteService.findWebsitesByUser(userId);
+            vm.userId = userId;
+
+            function init()
+            {
+                var promise = WebsiteService.findWebsitesByUser(userId);
+                promise
+                    .success(function(websites) {
+                        if (websites != '0') {
+                            vm.websites = websites;
+                         }
+                        })
+                    .error (function(){
+                        vm.alert = "Could not retrieve websites list";
+                    })
+            }
+            init();
+
+  /*          var websites = WebsiteService.findWebsitesByUser(userId);
             vm.websites = websites;
             vm.userId = userId;
             for(i = 0; i < websites.length; i++)
             {
                 console.log(websites[i].name);
-            }
+            }*/
         }
 
         function NewWebsiteController($routeParams, $location, WebsiteService) {

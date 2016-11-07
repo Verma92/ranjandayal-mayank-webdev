@@ -58,13 +58,15 @@
                 }
             });
         };
-
     }
 
     function ProfileController($routeParams, $location, UserService)
     {
         var vm = this;
         var userId = parseInt($routeParams.uid);
+        vm.userId = userId;
+        vm.updateProfile = updateProfile;
+        console.log(userId);
 
         function init()
         {
@@ -72,6 +74,7 @@
                 .success(function(user) {
                     if (user != '0') {
                         vm.user = user;
+                        console.log(user);
                     }
                 })
                 .error (function() {
@@ -79,34 +82,20 @@
                 });
         }
         init();
-        
-
-        var user = UserService.findUserById(userId);
-        var promise =
-
-        function init()
-        {
-           // vm.user = user;
-            vm.userId = userId;
-            vm.updateProfile = updateProfile;
-        }
-        init();
 
         function updateProfile()
         {
+            var promise = UserService.updateUser(userId, vm.user);
             promise.success(function(user){
                 if(user === '0') {
-                    vm.alert = "Unable to update";
+                    vm.alert = "Unable to update user";
                 } else {
-                    console.log("inside login controller "+user.username);
-                    $location.url("/user/" + vm.userId + "/website");
+                    console.log("updated user : "+user);
+                    $location.url("/user/"+vm.userId);
                 }
             });
         }
 /*
-
-
-
         function updateProfile()
         {
             UserService.updateUser(user);

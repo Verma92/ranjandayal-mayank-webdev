@@ -25,8 +25,12 @@
 
         return api;
 
-        function createWebsite(userId, website) {
-            website.developerId = userId;
+        function createWebsite(userId, website)
+        {
+            var url = '/api/user/'+userId+'/website';
+            return $http.post(url, website);
+
+            /*website.developerId = userId;
             var newWid;
             do {
                 newWid = getRandomInt(0, 1000).toString();
@@ -38,21 +42,22 @@
                         console.log(websites[i]);
                     return website;
                 }
-            }while(1);
+            }while(1);*/
         }
 
-        function findWebsitesByUser(userId) {
-            var result = [];
-            for (var w in websites) {
-                website = websites[w];
-                if(parseInt(website.developerId) === parseInt(userId)) {
-                    result.push(website);
-                }
-            }
-            return result;
+        function findWebsitesByUser(userId)
+        {
+            var url = '/api/user/'+userId+'/website';
+            return $http.get(url);
+
         }
 
-        function findWebsiteById(websiteId) {
+        function findWebsiteById(websiteId)
+        {
+            var url = '/api/website/'+websiteId;
+            return $http.get(url);
+
+            /*
             console.log(websiteId);
             for (var w in websites) {
                 website = websites[w];
@@ -61,11 +66,15 @@
                     return website;
                 }
             }
-            return null;
+            return null;*/
         }
 
-        function updateWebsite(websiteId, website) {
-            var webIndex = findWebIndexById(websiteId);
+        function updateWebsite(websiteId, website)
+        {
+            var url = '/api/website/'+websiteId;
+            return $http.put(url, website);
+
+           /* var webIndex = findWebIndexById(websiteId);
             if( webIndex === -1)
             {
                 return null;
@@ -74,11 +83,16 @@
             {
                 websites[webIndex] = website;
                 return websites[webIndex];
-            }
+            }*/
         }
 
-        function deleteWebsite(websiteId) {
-            var webIndex = findWebIndexById(websiteId);
+        function deleteWebsite(websiteId)
+        {
+            var url = '/api/website/'+websiteId;
+            return $http.delete(url);
+
+
+           /* var webIndex = findWebIndexById(websiteId);
             if(webIndex === -1)
             {
                 return false;
@@ -87,10 +101,10 @@
             {
                 websites.splice(webIndex, 1);
                 return true;
-            }
+            }*/
         }
 
-        function findWebIndexById(websiteId) {
+        /*function findWebIndexById(websiteId) {
             for(var i = 0; i < websites.length; i++)
             {
                 if( websites[i]._id === websiteId)
@@ -103,7 +117,7 @@
             min = Math.ceil(min);
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min)) + min;
-        }
+        }*/
     }
 
 })();
