@@ -24,48 +24,38 @@
 
         return api;
 
-        function createUser(user){
-            var userId;
-            do {
-                userId = getRandomInt(0, 1000).toString();
-                if (findUserById(userId) === null)
-                {
-                    user._id = userId;
-                    users.push(user);
-                    for(i = 0; i < users.length; i++)
-                        console.log(users[i]);
-                    return user;
-                }
-            } while(1);
+        function findUserByCredentials(username, password){
+
+            var url = '/api/user?username='+username+'&password='+password;
+            return  $http.get(url);
         }
 
-        function findUserById(userId){
-            for (var u in users) {
+        function createUser(user)
+        {
+            var url = '/api/user';
+            return $http.post(url, user);
+        }
+
+        function findUserById(userId)
+        {
+            var url = '/api/user/' + userId;
+            return $http.get(url);
+        }
+
+           /* for (var u in users) {
                 user = users[u];
                 if(parseInt(user._id) === userId) {
                     return user;
                 }
             }
             return null;
-        }
+        */
 
         function findUserByUsername(username){
 
         }
 
-        function findUserByCredentials(username, password){
 
-            var url = '/api/user?username='+username+'&password='+password;
-            return $http.get(url);
-
-/*            for (var u in users) {
-                user = users[u];
-                if(user.username === username && user.password === password){
-                    return user;
-                }
-            }
-            return null;*/
-        }
 
         function updateUser(userId, user){
             var userIndex = findUserIndexById(userId);
