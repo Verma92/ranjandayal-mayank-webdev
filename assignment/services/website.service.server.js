@@ -28,18 +28,31 @@ module.exports = function(app) {
         var website = req.body;
         website.developerId = req.params.userId;
 
-        do {
+        /*do {
             newWid = getRandomInt(0, 1000).toString();
-            if (findWebsiteById(newWid) === null)
+            existingWid = function () {
+
+                for (var w in websites) {
+                website = websites[w];
+                console.log(website);
+                if(parseInt(website._id) != parseInt(wid))
+                {
+                    return null;
+                }
+              }
+            };
+
+            if (existingWid === null)
             {
                 website._id = newWid;
-                websites.push(website);
+                //websites.push(website);
                 for(i = 0; i < websites.length; i++)
                     console.log(websites[i]);
                 return;
             }
-        }while(1);
+        }while(1);*/
 
+        website._id = 500;
         websites.push(website);
         res.json(websites);
     }

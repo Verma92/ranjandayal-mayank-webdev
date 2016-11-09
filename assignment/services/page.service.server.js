@@ -15,19 +15,45 @@ module.exports = function(app) {
     app.put("/api/page/:pageId", updatePage);
     app.delete("/api/page/:pageId", deletePage);
     
-    function createPage(){}
+    function createPage(req, res)
+    {
+        var page = req.body;
+        page.websiteId = req.params.websiteId;
+        var newPid;
+
+        /*do {
+            newPid = getRandomInt(0, 1000).toString();
+            if (findPageById(newPid) === null)
+            {
+                page._id = newPid;
+                pages.push(page);
+                return page;
+            }
+        }while(1);*/
+
+        page._id = newPid;
+        pages.push(page);
+        res.json(pages);
+
+    }
     
-    function findAllPagesForWebsite() {}
+    function findAllPagesForWebsite(req, res)
+    {
+
+    }
     
-    function findPageById() {
+    function findPageById(req, res)
+    {
         
     }
     
-    function updatePage() {
+    function updatePage(req, res)
+    {
         
     }
     
-    function deletePage() {
+    function deletePage(req, res)
+    {
         
     }
 

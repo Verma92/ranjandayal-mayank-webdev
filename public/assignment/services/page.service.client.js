@@ -21,8 +21,12 @@
 
         return api;
 
-        function createPage(websiteId, page) {
-            page.websiteId = websiteId;
+        function createPage(websiteId, page)
+        {
+            var url = "/api/website/" + websiteId + "/page";
+            return $http.post(url, page);
+
+           /* page.websiteId = websiteId;
             var newPid;
             do {
                 newPid = getRandomInt(0, 1000).toString();
@@ -32,7 +36,7 @@
                     pages.push(page);
                     return page;
                 }
-            }while(1);
+            }while(1);*/
         }
 
         function findPageByWebsiteId(websiteId) {
