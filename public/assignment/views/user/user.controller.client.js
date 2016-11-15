@@ -62,6 +62,7 @@
 
     function ProfileController($routeParams, $location, UserService)
     {
+        console.log($routeParams);
         var vm = this;
         var userId = parseInt($routeParams.uid);
         vm.userId = userId;
