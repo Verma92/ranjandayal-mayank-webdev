@@ -5,11 +5,11 @@
 
     function PageService($http){
 
-        var pages =  [
+       /* var pages =  [
             { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
             { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
             { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" }
-        ];
+        ];*/
 
         var api = {
             createPage:createPage,
@@ -39,22 +39,33 @@
             }while(1);*/
         }
 
-        function findPageByWebsiteId(websiteId) {
+        function findPageByWebsiteId(websiteId)
+        {
             console.log(websiteId);
-            var result = [];
-            for (var w in pages) {
-                page = pages[w];
-                console.log(page);
-                if(parseInt(page.websiteId) === parseInt(websiteId)) {
-                    result.push(page);
-                }
-            }
-            return result;
+
+            var url = "/api/website/"+websiteId+"/page";
+            return $http.get(url);
+
         }
 
-        function findPageById(pageId) {
+        function findPageById(pageId)
+        {
+            console.log("findpagebyid called");
+            var url = "/api/page/"+pageId;
+            console.log($http.get(url));
+            var promise = $http.get(url);
+            promise
+                .success(function(page) {
+                    console.log("success");
+                    console.log(page);
+                });
+            return $http.get(url);
+
+           /* console.log("findpagebyid service client");
             console.log(pageId);
-            for (var p in pages) {
+            console.log(pages);
+            for (var p in pages)
+            {
                 page = pages[p];
 
                 if(parseInt(page._id) === parseInt(pageId)) {
@@ -63,24 +74,36 @@
 
                 }
             }
-            return null;
+            return null;*/
         }
 
-        function updatePage(pageId, page) {
+        function updatePage(pageId, page)
+        {
+            var url = "/api/page/"+pageId;
+            return $http.put(url, page);
+
+            /*console.log("updatepage function");
+            console.log(page);
             var pageIndex = findPageIndexById(pageId);
             if(pageIndex === -1)
             {
+                console.log("null return");
                 return null;
             }
             else
             {
                 pages[pageIndex] = page;
+                console.log(pages);
                 return pages[pageIndex];
-            }
+            }*/
         }
 
-        function deletePage(pageId) {
-            var pageIndex = findPageIndexById(pageId);
+        function deletePage(pageId)
+        {
+            var url = "/api/page/"+pageId;
+            return $http.delete(url);
+
+           /* var pageIndex = findPageIndexById(pageId);
             if(pageIndex === -1)
             {
                 return false;
@@ -89,10 +112,10 @@
             {
                 pages.splice(pageIndex, 1);
                 return true;
-            }
+            }*/
         }
 
-        function getRandomInt(min, max) {
+       /* function getRandomInt(min, max) {
             min = Math.ceil(min);
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min)) + min;
@@ -105,7 +128,7 @@
                     return i;
             }
             return -1;
-        }
+        }*/
     }
 
 })();

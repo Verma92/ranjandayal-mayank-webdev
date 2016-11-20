@@ -5,15 +5,26 @@
         .controller("NewPageController", NewPageController)
         .controller("PageListController", PageListController);
 
-    function EditPageController($routeParams, PageService, $location) {
+    function EditPageController($routeParams, PageService, $location)
+    {
         var vm = this;
         var userId = $routeParams.uid;
         var pageId = $routeParams.pid;
         var websiteId = $routeParams.wid;
-        var page = PageService.findPageById(pageId);
+        console.log(pageId);
+        var promise = PageService.findPageById(pageId);
+        console.log("findPageById called from controller");
+
+        promise
+            .success(function(page) {
+                console.log("success controller");
+                console.log(page);
+                vm.page = page;
+            });
+
         function init()
         {
-            vm.page = page;
+            //vm.page = pageOut;
             vm.userId = userId;
             vm.websiteId = websiteId;
             vm.pageId = pageId;
@@ -24,7 +35,9 @@
 
         function updatePage()
         {
-            PageService.updatePage(pageId, page);
+            console.log("update page controller");
+            console.log(vm.page);
+            PageService.updatePage(pageId, vm.page);
             $location.url("/user/"+userId+"/website/"+websiteId+"/page");
         }
 
@@ -33,10 +46,10 @@
             PageService.deletePage(pageId);
             $location.url("/user/"+userId+"/website/"+websiteId+"/page");
         }
-
     }
 
-    function NewPageController($routeParams, PageService, $location) {
+    function NewPageController($routeParams, PageService, $location)
+    {
         var vm = this;
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
@@ -53,17 +66,21 @@
         {
             PageService.createPage(websiteId, page);
             $location.url("/user/"+userId+"/website/"+websiteId+"/page");
-
         }
     }
 
-    function PageListController($routeParams, PageService) {
+    function PageListController($routeParams, PageService)
+    {
         var vm = this;
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
-        var pages = PageService.findPageByWebsiteId(websiteId);
-        vm.pages = pages;
         vm.userId = userId;
         vm.websiteId = websiteId;
+
+        var promise = PageService.findPageByWebsiteId(websiteId);
+        promise
+            .success(function(pages) {
+                vm.pages = pages;
+            });
     }
 })();

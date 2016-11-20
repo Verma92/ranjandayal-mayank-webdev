@@ -17,44 +17,134 @@ module.exports = function(app) {
     
     function createPage(req, res)
     {
+        console.log("reached createPage function server side");
         var page = req.body;
         page.websiteId = req.params.websiteId;
-        var newPid;
-
-        /*do {
+        var newPid = '999';
+        /* todo  */
+       /* do {
             newPid = getRandomInt(0, 1000).toString();
-            if (findPageById(newPid) === null)
+            if (findPageByIdLocal(newPid) === null)
             {
                 page._id = newPid;
                 pages.push(page);
                 return page;
             }
-        }while(1);*/
-
+        }while(1);
+*/
         page._id = newPid;
         pages.push(page);
+        console.log("pages server service");
+        console.log(pages);
         res.json(pages);
 
     }
-    
+
+    //corresponds to findPageByWebsiteId from client service
     function findAllPagesForWebsite(req, res)
     {
-
+        var wid = req.params.websiteId;
+        var result = [];
+        for (var w in pages)
+        {
+            page = pages[w];
+            console.log(page);
+            if(parseInt(page.websiteId) === parseInt(wid))
+            {
+                result.push(page);
+            }
+        }
+        console.log(pages);
+        res.json(result);
     }
     
     function findPageById(req, res)
     {
-        
+        var pageId = req.params.pageId;
+
+        for (var p in pages)
+        {
+            page = pages[p];
+
+            if(parseInt(page._id) === parseInt(pageId)) {
+                console.log(page);
+                res.json(page);
+                return;
+
+            }
+        }
+        res.json('0');
+        return;
     }
     
     function updatePage(req, res)
     {
-        
+        console.log(pages);
+        var pageId = req.params.pageId;
+        console.log(pageId);
+        var pageIndex = findPageByIdLocal(pageId);
+        console.log(pageIndex);
+        var page = req.body;
+        console.log(page);
+        if(pageIndex === null)
+        {
+            console.log("null return from updatePage");
+            res.json('0');
+            return;
+        }
+        else
+        {
+            pages[pageIndex] = page;
+            console.log("updatepage server service");
+            console.log(pages);
+            res.json(pages[pageIndex]);
+            return;
+        }
     }
     
     function deletePage(req, res)
     {
-        
+        var pageId = req.params.pageId;
+
+        var pageIndex = findPageByIdLocal(pageId);
+        if(pageIndex === null)
+        {
+            console.log("null return from deletePage");
+            res.json('0');
+            return;
+        }
+        else
+        {
+            pages.splice(pageIndex, 1);
+            res.json(pages);
+            return;
+        }
+    }
+
+    // auxiliary functions
+
+    function findPageByIdLocal(pid)
+    {
+        console.log("searching in following pages: ");
+        console.log(pages);
+        console.log(pid.type);
+        console.log(pid);
+        for(p in pages)
+        {
+            if (parseInt(pid) === parseInt(pages[p]._id))
+                return pages[p];
+            else
+                return null;
+        }
+
+    }
+
+    function getRandomInt(min, max)
+    {
+
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
     }
 
 

@@ -27,7 +27,7 @@ module.exports = function(app) {
         var newWid;
         var website = req.body;
         website.developerId = req.params.userId;
-
+            /*todo*/ //check delete website bug post that
         /*do {
             newWid = getRandomInt(0, 1000).toString();
             existingWid = function () {
@@ -72,15 +72,17 @@ module.exports = function(app) {
     function findWebsiteById(req, res)
     {
         var wid = req.params.websiteId;
-        for (var w in websites) {
+        for (var w in websites)
+        {
             website = websites[w];
             console.log(website);
             if(parseInt(website._id) === parseInt(wid))
             {
                 res.json(website);
+                return;
             }
         }
-        res.send('0');
+        res.json('0');
     }
 
     function updateWebsite(req, res)

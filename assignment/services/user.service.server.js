@@ -18,12 +18,12 @@ module.exports = function(app) {
     app.put('/api/user/:uid', updateUser);
     app.delete('/api/user/:uid', deleteUser);
 
-    app.delete('/api/user/:uid', unregisterUser);
-
+    //not a part of assignment
+  //  app.delete('/api/user/:uid', unregisterUser);
     app.get('/api/user', findUser);
 
 
-    function unregisterUser(req, res)
+    function deleteUser(req, res)
     {
         var uid = req.params.uid;
         for(var u in users) {
@@ -120,11 +120,6 @@ module.exports = function(app) {
         }
         res.send('0');
     }
-
-    function deleteUser(userId){
-
-    }
-
 
     //auxiliary functions
 

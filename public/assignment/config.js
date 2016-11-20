@@ -30,12 +30,12 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
-
+/*
             .when("/profile", {
                 templateUrl: "/assignment/views/user/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model"
-            })
+            })*/
 
             .when("/user/:uid", {
                 templateUrl: "/assignment/views/user/profile.view.client.html",
@@ -43,11 +43,11 @@
                 controllerAs: "model"
             })
 
-            .when("/page-edit", {
+           /* .when("/page-edit", {
                 templateUrl: "/assignment/views/page/page-edit.view.client.html",
                 controller: "EditPageController",
                 controllerAs: "model"
-            })
+            })*/
 
             .when("/user/:uid/website/:wid/page/new", {
                 templateUrl: "/assignment/views/page/page-new.view.client.html",
@@ -61,11 +61,11 @@
                 controllerAs: "model"
             })
 
-            .when("/page-list", {
+          /*  .when("/page-list", {
                 templateUrl: "/assignment/views/page/page-list.view.client.html",
                 controller: "ListPageController",
                 controllerAs: "model"
-            })
+            })*/
 
             .when("/user/:uid/website/:wid/page", {
                 templateUrl: "/assignment/views/page/page-list.view.client.html",
