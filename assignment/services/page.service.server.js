@@ -22,7 +22,7 @@ module.exports = function(app) {
         page.websiteId = req.params.websiteId;
         var newPid = '999';
         /* todo  */
-       /* do {
+        do {
             newPid = getRandomInt(0, 1000).toString();
             if (findPageByIdLocal(newPid) === null)
             {
@@ -31,7 +31,6 @@ module.exports = function(app) {
                 return page;
             }
         }while(1);
-*/
         page._id = newPid;
         pages.push(page);
         console.log("pages server service");
@@ -82,7 +81,7 @@ module.exports = function(app) {
         console.log(pages);
         var pageId = req.params.pageId;
         console.log(pageId);
-        var pageIndex = findPageByIdLocal(pageId);
+        var pageIndex = findPageIndexById(pageId);
         console.log(pageIndex);
         var page = req.body;
         console.log(page);
@@ -106,7 +105,7 @@ module.exports = function(app) {
     {
         var pageId = req.params.pageId;
 
-        var pageIndex = findPageByIdLocal(pageId);
+        var pageIndex = findPageIndexById(pageId);
         if(pageIndex === null)
         {
             console.log("null return from deletePage");
@@ -137,6 +136,16 @@ module.exports = function(app) {
                 return null;
         }
 
+    }
+
+    function findPageIndexById(pageId)
+    {
+        for(var i = 0; i < pages.length; i++)
+        {
+            if(parseInt(pages[i]._id) === parseInt(pageId))
+                return i;
+        }
+        return null;
     }
 
     function getRandomInt(min, max)
