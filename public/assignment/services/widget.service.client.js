@@ -23,7 +23,7 @@
             "IMAGE": "image",
             "YOUTUBE": "youtube" };
 
-        var widgetTypes = [ "HEADER",
+      /*  var widgetTypes = [ "HEADER",
                             "IMAGE",
                             "HTML",
                             "YOUTUBE" ];
@@ -33,7 +33,7 @@
             "HEADER": {"size":1},
             "IMAGE": {"width": "100%"},
             "YOUTUBE": {"width": "100%"}
-        };
+        };*/
 
         var api = {
             createWidget: createWidget,
@@ -50,7 +50,13 @@
 
         function createWidget(pageId, widget)
         {
-            widget.pageId = pageId;
+            console.log("inside createWidget service client");
+            console.log(pageId);
+            console.log(widget);
+            var url = "/api/page/"+pageId+"/widget";
+            return $http.post(url, widget);
+
+            /*widget.pageId = pageId;
             var newWid;
             do {
                 newWid = getRandomInt(0, 1000).toString();
@@ -60,29 +66,29 @@
                     widgets.push(widget);
                     return widget;
                 }
-            } while(1);
+            } while(1);*/
         }
 
-        function findWidgetsByPageId(pageId) {
-            var result = [];
-            for (var w in widgets) {
-                widget = widgets[w];
-                if(parseInt(widget.pageId) === parseInt(pageId)) {
-                    result.push(widget);
-                }
-            }
-            return result;
+        function findWidgetsByPageId(pageId)
+        {
+            var url = "/api/page/"+pageId+"/widget";
+            return $http.get(url);
         }
 
-        function findWidgetById(widgetId) {
-
+        function findWidgetById(widgetId)
+        {
+            console.log("findWidgetById client service");
+            console.log(widgetId);
+            var url = "/api/widget/"+widgetId;
+            return $http.get(url);
+           /*
             for (var w in widgets) {
                 widget = widgets[w];
                 if(parseInt(widget._id) === parseInt(widgetId)) {
                     return widget;
                 }
             }
-            return null;
+            return null;*/
         }
 
         function updateWidget(widgetId, widget) {
@@ -93,13 +99,36 @@
 
         }
 
-        function getFilenamePrefix(widgetType) {
-            return filenamePrefixes[widgetType];
+        function getFilenamePrefix(widgetType)
+        {
+            if (widgetType.toString() === "HEADER")
+                return "heading";
+            else if (widgetType.toString() === "HTML")
+                return "html";
+            else if (widgetType.toString() === "IMAGE")
+                return "image";
+            else if (widgetType.toString() === "YOUTUBE")
+                return "youtube";
+
+           /* url = "/api/widget/filename/"+widgetType;
+            return $http.get(url);*/
         }
 
-        function getAllWidgetTypes() {
-            console.log("inside getAllWidgetTypes");
-            return widgetTypes;
+        function getAllWidgetTypes()
+        {
+            url = "/api/widget";
+            return $http.get(url);
+
+            /*console.log("inside getAllWidgetTypes");
+            return widgetTypes;*/
+        }
+
+        function getDefaultWidgetValues()
+        {
+            url = "/api/widget/default";
+            return $http.get(url);
+/*
+            return defaultWidgetValues;*/
         }
 
         function getRandomInt(min, max) {
@@ -108,10 +137,7 @@
             return Math.floor(Math.random() * (max - min)) + min;
         }
 
-        function getDefaultWidgetValues()
-        {
-            return defaultWidgetValues;
-        }
+
     }
 
 })();

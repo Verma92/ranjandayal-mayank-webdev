@@ -8,11 +8,16 @@
         .controller("NewWidgetController", NewWidgetController)
         .controller("EditWidgetController", EditWidgetController)
 
-    function WidgetListController($routeParams, WidgetService, $sce) {
-
+    function WidgetListController($routeParams, WidgetService, $sce)
+    {
         console.log("widget list controller");
         var vm = this;
         var pid = $routeParams.pid;
+
+        var promise = WidgetService.findWidgetsByPageId(pid);
+        promise.success(function (widgets) {
+            vm.widgets = widgets;
+        });
 
         function init() {
             vm.pageId = pid;
@@ -20,8 +25,6 @@
             vm.websiteId = $routeParams.wid;
             vm.checkSafeHtml = checkSafeHtml;
             vm.checkSafeYoutubeUrl = checkSafeYoutubeUrl;
-            vm.widgets = WidgetService.findWidgetsByPageId(pid);
-            console.log(WidgetService.findWidgetsByPageId(pid));
         }
         init();
 
@@ -39,8 +42,8 @@
 
     }
 
-    function NewWidgetController($routeParams, WidgetService, $location) {
-
+    function NewWidgetController($routeParams, WidgetService, $location)
+    {
         var vm = this;
         var userId = $routeParams.uid;
         var pageId = $routeParams.pid;
@@ -50,52 +53,91 @@
             vm.pageId = pageId;
             vm.userId = userId;
             vm.websiteId=$routeParams.wid;
-            vm.widgetTypes = WidgetService.getAllWidgetTypes();
+
+            var promise = WidgetService.getAllWidgetTypes();
+            promise.success(function (widgetTypes) {
+                vm.widgetTypes = widgetTypes;
+            })
+
             vm.createWidget = createWidget;
             console.log("inside NewWidgetControllerInit");
 
         }
         init();
 
-        function createWidget(widgetType) {
-
+        function createWidget(widgetType)
+        {
             var widget = {"widgetType": widgetType};
-            var allDefaultWidgetValues = WidgetService.getDefaultWidgetValues();
-            var defaultWidgetValues = allDefaultWidgetValues[widgetType];
-            console.log(defaultWidgetValues);
-            if( undefined !== defaultWidgetValues)
-            {
-                for (var key in defaultWidgetValues)
-                {
-                    widget[key] = defaultWidgetValues[key];
-                }
-            }
-            console.log(widget);
+            var promise = WidgetService.getDefaultWidgetValues();
+            console.log("createWidget called from controller");
+            console.log(promise);
+            var defaultWidgetValues;
+            promise
+                .success(function(allDefaultWidgetVals) {
+                    console.log("success controller");
+                    console.log(allDefaultWidgetVals);
+                    var defaultWidgetValues = allDefaultWidgetVals[widgetType];
+                    console.log(defaultWidgetValues);
+                    if( undefined !== defaultWidgetValues)
+                    {
+                        for (var key in defaultWidgetValues)
+                        {
+                            widget[key] = defaultWidgetValues[key];
+                        }
+                    }
+                    console.log(widget);
+                    var promise = WidgetService.createWidget(vm.pageId, widget);
+                    promise.success(function (newWidgetRes) {
+                        $location.url("/user/" + vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + newWidgetRes._id);
+                    })
+                });
 
-            var newWidget = WidgetService.createWidget(vm.pageId, widget);
-            $location.url("/user/" + vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + newWidget._id);
+
+            //var defaultWidgetValues = allDefaultWidgetValues[widgetType];
+
+
+
         }
     }
 
-    function EditWidgetController($routeParams, WidgetService, $sce) {
+    function EditWidgetController($routeParams, WidgetService)
+    {
 
         var vm = this;
 
-        function init() {
+        var promise = WidgetService.findWidgetById($routeParams.wgid);
+        console.log(promise);
+        promise.success(function (widgetRes) {
+            console.log("widget res");
+            console.log(widgetRes);
+            vm.widget = widgetRes;
+            vm.getFilenamePrefix = getFilenamePrefix;
+        });
 
+        function init()
+        {
             vm.userId=$routeParams.uid;
             vm.websiteId=$routeParams.wid;
             vm.pageId=$routeParams.pid;
-            vm.widget=WidgetService.findWidgetById($routeParams.wgid);
-            vm.getFilenamePrefix = getFilenamePrefix;
-            console.log("inside EditWidgetController");
 
         }
         init();
 
-        function getFilenamePrefix() {
+        function getFilenamePrefix()
+        {
+            /*
             console.log("inside filename prefix");
-            return WidgetService.getFilenamePrefix(vm.widget.widgetType);
+            var promise = WidgetService.getFilenamePrefix(vm.widget.widgetType);
+            promise.success(function (widType) {
+                return widType;
+            })*/
+
+            console.log("widget type:");
+            console.log(vm.widget.widgetType);
+            var prefix = WidgetService.getFilenamePrefix(vm.widget.widgetType);
+            console.log("prefix:");
+            console.log(prefix);
+            return prefix;
         }
     }
 /*    function WidgetChooseController() {  }

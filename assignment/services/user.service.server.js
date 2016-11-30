@@ -110,7 +110,8 @@ module.exports = function(app) {
         res.send('0');
     }
 
-    function findUserById(req, res) {
+    function findUserById(req, res)
+    {
         var userId = parseInt(req.params.uid);
         for(var u in users) {
             if(parseInt(users[u]._id) === userId) {
