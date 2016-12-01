@@ -91,12 +91,6 @@
                         $location.url("/user/" + vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + newWidgetRes._id);
                     })
                 });
-
-
-            //var defaultWidgetValues = allDefaultWidgetValues[widgetType];
-
-
-
         }
     }
 
@@ -104,8 +98,8 @@
     {
 
         var vm = this;
-
-        var promise = WidgetService.findWidgetById($routeParams.wgid);
+        var wgid = $routeParams.wgid;
+        var promise = WidgetService.findWidgetById(wgid);
         console.log(promise);
         promise.success(function (widgetRes) {
             console.log("widget res");
@@ -116,6 +110,8 @@
 
         function init()
         {
+            vm.deleteWidget = deleteWidget;
+            vm.updateWidget = updateWidget;
             vm.userId=$routeParams.uid;
             vm.websiteId=$routeParams.wid;
             vm.pageId=$routeParams.pid;
@@ -123,15 +119,25 @@
         }
         init();
 
+        function updateWidget()
+        {
+            var promise = WidgetService.updateWidget(wgid, vm.widget);
+            promise.success(function (widget) {
+                vm.widget = widget;
+                $location.url("/user/" + vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/");
+            })
+        }
+
+        function deleteWidget()
+        {
+            var promise = WidgetService.deleteWidget(wgid);
+            promise.success(function () {
+                $location.url("/user/" + vm.userId +"/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/");
+            })
+        }
+
         function getFilenamePrefix()
         {
-            /*
-            console.log("inside filename prefix");
-            var promise = WidgetService.getFilenamePrefix(vm.widget.widgetType);
-            promise.success(function (widType) {
-                return widType;
-            })*/
-
             console.log("widget type:");
             console.log(vm.widget.widgetType);
             var prefix = WidgetService.getFilenamePrefix(vm.widget.widgetType);
@@ -140,6 +146,5 @@
             return prefix;
         }
     }
-/*    function WidgetChooseController() {  }
-    function WidgetYoutubeController() {  }*/
+
 })();

@@ -119,14 +119,39 @@ module.exports = function(app) {
         return;
     }
     
-    function updateWidget()
+    function updateWidget(req, res)
     {
-        
+        var wid = req.params.widgetId;
+        var widget = req.body;
+        var widIndex = findWidgetIndexById(wid);
+        if(widIndex === -1)
+        {
+            res.send('0');
+            return;
+        }
+        else
+        {
+            widgets[widIndex] = widget;
+            res.json(widgets[widIndex]);
+            return;
+        }
     }
     
-    function deleteWidget()
+    function deleteWidget(req, res)
     {
-        
+        var wid = req.params.widgetId;
+        var widIndex = findWidgetIndexById(wid);
+        if(widIndex === -1)
+        {
+            res.send('0');
+            return;
+        }
+        else
+        {
+            widgets.splice(widIndex, 1);
+            res.send(200);
+            return;
+        }
     }
 
     function getAllWidgetTypes(req, res)
@@ -149,6 +174,16 @@ module.exports = function(app) {
 
 
     // auxiliary functions
+
+    function findWidgetIndexById(widgetId)
+    {
+        for(var i = 0; i < widgets.length; i++)
+        {
+            if( widgets[i]._id === widgetId)
+                return i;
+        }
+        return -1;
+    }
 
     function findWidgetByIdLocal(wid)
     {
@@ -181,7 +216,4 @@ module.exports = function(app) {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
     }
-
-
-
 };
