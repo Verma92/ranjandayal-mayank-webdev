@@ -1,7 +1,7 @@
 /**
  * Created by mayank on 11/5/16.
  */
-module.exports = function(app) {
+module.exports = function(app, model) {
 
     var users =   [
         {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
@@ -64,6 +64,7 @@ module.exports = function(app) {
 
         user._id = 220;
         users.push(user);
+        model.userModel.create(user);
         res.send(user);
         return;
 /*
