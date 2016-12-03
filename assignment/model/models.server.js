@@ -12,20 +12,17 @@ module.exports = function ()
     var widgetModel = require("./widget/widget.model.server")();
     var pageModel = require("./page/page.model.server")();
 */
-
     var model = {
-        userModel: userModel,
+        userModel: userModel
       /*  websiteModel: websiteModel,
         widgetModel: widgetModel,
         pageModel: pageModel*/
     };
 
-
     userModel.setModel(model);
     /*websiteModel.setModel(model);
     widgetModel.setModel(model);
     pageModel.setModel(model);*/
-
 
     return model;
 };

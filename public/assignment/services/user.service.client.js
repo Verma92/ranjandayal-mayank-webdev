@@ -30,14 +30,30 @@
             return  $http.get(url);
         }
 
-        function createUser(user)
+/*        function createUser(user)
         {
             var url = '/api/user';
-            return $http.post(url, user);
+            console.log(user);
+            console.log("response from server service to cleint service");
+            var response = $http.post(url, user);
+            response.success(function (newuser) {
+                console.log(newuser);
+            });
+            console.log(response);
+            return response;
+        }*/
+
+        function createUser(username, password) {
+            var user = {
+                username: username,
+                password: password
+            };
+            return $http.post("/api/user", user);
         }
 
         function findUserById(userId)
         {
+            console.log(userId);
             var url = '/api/user/' + userId;
             console.log(url);
             return $http.get(url);

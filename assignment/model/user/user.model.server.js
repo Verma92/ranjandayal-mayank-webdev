@@ -17,6 +17,7 @@ module.exports = function () {
         setModel: setModel
     };
     return api;
+
     function setModel(_model) {
         model = _model;
     }
@@ -55,10 +56,24 @@ module.exports = function () {
 
     function findUserById(userId) {
         // UserModel.find({_id: userId}) --> returns an array
-        return UserModel.findById(userId);
+        var promise = UserModel.findById(userId);
+        console.log("find by id in db");
+        console.log(promise);
+        return promise;
     }
 
+    /*function createUser(user) {
+        console.log("user received at model");
+        console.log(user);
+        var promise = UserModel.create(user);
+        console.log("create user in db");
+        console.log(promise);
+        return promise;
+    }*/
+
     function createUser(user) {
+        console.log("user received at model:");
+        console.log(user);
         return UserModel.create(user);
     }
 };
