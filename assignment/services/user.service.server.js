@@ -115,13 +115,27 @@ module.exports = function(app, model) {
     {
         var user = req.body;
         var uid = req.params.uid;
+        model
+            .userModel
+            .updateUser(uid, user)
+            .then(
+                function (status) {
+                    res.send(200);
+                },
+                function (error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
+        /*var user = req.body;
+        var uid = req.params.uid;
         for(var u in users) {
             if(users[u]._id == uid) {
                 users[u] = user;
             }
         }
         console.log(users);
-        res.send(200);
+        res.send(200);*/
     }
 
     function createUser(req, res) {
