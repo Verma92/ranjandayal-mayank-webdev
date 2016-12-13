@@ -6,12 +6,12 @@ module.exports = function(app, model) {
     var passport = require('passport');
     var auth = authorized;
 
-    var users =   [
+   /* var users =   [
         {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
         {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
         {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-    ];
+    ];*/
 
     app.post('/api/user', createUser);
     app.get('/api/user?username=username', findUserByUsername);
@@ -102,13 +102,26 @@ module.exports = function(app, model) {
 
     function deleteUser(req, res)
     {
-        var uid = req.params.uid;
+        /*var uid = req.params.uid;
         for(var u in users) {
             if(users[u]._id == uid) {
                 users.splice(u, 1);
             }
         }
-        res.send(200);
+        res.send(200);*/
+
+        var uid = req.params.uid;
+        model
+            .userModel
+            .deleteUser(uid)
+            .then(
+                function(status) {
+                    res.sendStatus(200);
+                },
+                function(err) {
+                    res.sendStatus(400).send(err);
+                }
+            );
     }
 
     function updateUser(req, res)
@@ -117,7 +130,7 @@ module.exports = function(app, model) {
         var uid = req.params.uid;
         model
             .userModel
-            .updateUser(uid, user)
+            .updateUser(user, uid)
             .then(
                 function (status) {
                     res.send(200);
@@ -212,7 +225,7 @@ module.exports = function(app, model) {
     }
 
     function findUserByCredentials(req, res) {
-        var username = req.query.username;
+        /*var username = req.query.username;
         var password = req.query.password;
         for(var u in users) {
             if(users[u].username === username &&
@@ -221,7 +234,30 @@ module.exports = function(app, model) {
                 return;
             }
         }
-        res.send('0');
+        res.send('0');*/
+        var username = req.query.username;
+        var password = req.query.password;
+
+        console.log(username);
+        console.log(password);
+
+        model
+            .userModel
+            .findUserByCredentials(username, password)
+            .then(
+                function(user) {
+                    console.log(user);
+                    if (user) {
+                        res.json(user);
+                    }
+                    else {
+                        res.send('0');
+                    }
+                },
+                function(err) {
+                    res.sendStatus(400).send(err);
+                }
+            );
     }
 
     function findUserByUsername(req, res) {
@@ -246,7 +282,7 @@ module.exports = function(app, model) {
         }
         res.send('0');*/
         var userId = req.params.uid;
-        console.log("user id at finduser byid");
+        console.log("user id at finduser by id");
         console.log(userId);
         model
             .userModel
@@ -263,7 +299,6 @@ module.exports = function(app, model) {
                     res.sendStatus(400).send(error);
                 }
             )
-
     }
 
 

@@ -91,7 +91,7 @@
 
         function getDefaultWidgetValues()
         {
-            url = "/api/widget/default";
+            url = "/api/widgetdefault";
             return $http.get(url);
         }
     }

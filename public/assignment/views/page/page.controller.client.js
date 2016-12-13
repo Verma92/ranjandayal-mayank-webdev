@@ -43,7 +43,7 @@
 
         function deletePage()
         {
-            PageService.deletePage(pageId);
+            PageService.deletePage(pageId, websiteId);
             $location.url("/user/"+userId+"/website/"+websiteId+"/page");
         }
     }
@@ -80,6 +80,8 @@
         var promise = PageService.findPageByWebsiteId(websiteId);
         promise
             .success(function(pages) {
+                console.log("pages");
+                console.log(pages);
                 vm.pages = pages;
             });
     }

@@ -29,10 +29,10 @@
         <ul class="list-group">
 
             <li ng-repeat = "page in model.pages" class="list-group-item">
-                <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}" class="navbar-link">
                     <span class="glyphicon glyphicon-cog pull-right"> </span>
                 </a>
-                <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}/widget" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget" class="navbar-link">
                     {{page.name}}
                 </a>
             </li>

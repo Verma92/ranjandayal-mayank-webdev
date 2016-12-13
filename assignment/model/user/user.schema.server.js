@@ -8,18 +8,16 @@ module.exports = function()
     var UserSchema = mongoose.Schema({
         username: String,
         password: String,
-        first: String,
-        last: String,
+        firstName: String,
+        lastName: String,
+        phone: Number,
         email: String,
-        phone: String,
-        dateCreated: { type: Date, default: Date.now},
-        websites: [{type: mongoose.Schema.Types.ObjectId, ref:'WebsiteModel'}],
-        google: {
+        websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'WebsiteModel'}],
+        facebook: {
             id: String,
-            token: String,
-            email: String
+            token: String
         },
-        role: {type: String, default: "STUDENT", enum: ['ADMIN', 'STUDENT', 'FACULTY']}
+        dateCreated: { type: Date, default: Date.now}
     }, {collection: "user"});
     return UserSchema;
-};
+}

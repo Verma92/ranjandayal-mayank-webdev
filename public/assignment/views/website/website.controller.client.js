@@ -77,7 +77,7 @@
 
             function deleteWebsite()
             {
-                WebsiteService.deleteWebsite(vm.websiteId);
+                WebsiteService.deleteWebsite(vm.userId, vm.websiteId);
                 $location.url("/user/" + vm.userId + "/website");
             }
 
@@ -147,8 +147,11 @@
 
             function createWebsite(website)
             {
-                WebsiteService.createWebsite(vm.userId, website);
-                console.log("website created !")
+                var pro = WebsiteService.createWebsite(vm.userId, website);
+                console.log("website created !");
+                pro.success(function (web) {
+                    console.log(web);
+                })
                 $location.url("/user/" + vm.userId + "/website");
             }
         }

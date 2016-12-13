@@ -7,22 +7,20 @@ module.exports = function ()
     mongoose.connect('mongodb://localhost/wam-fall-2016');
 
     var userModel = require("./user/user.model.server")();
-/*
     var websiteModel = require("./website/website.model.server")();
     var widgetModel = require("./widget/widget.model.server")();
     var pageModel = require("./page/page.model.server")();
-*/
     var model = {
-        userModel: userModel
-      /*  websiteModel: websiteModel,
+        userModel: userModel,
+        websiteModel: websiteModel,
         widgetModel: widgetModel,
-        pageModel: pageModel*/
+        pageModel: pageModel
     };
 
     userModel.setModel(model);
-    /*websiteModel.setModel(model);
+    websiteModel.setModel(model);
     widgetModel.setModel(model);
-    pageModel.setModel(model);*/
+    pageModel.setModel(model);
 
     return model;
 };

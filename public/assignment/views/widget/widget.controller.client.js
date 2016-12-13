@@ -139,8 +139,8 @@
         function getFilenamePrefix()
         {
             console.log("widget type:");
-            console.log(vm.widget.widgetType);
-            var prefix = WidgetService.getFilenamePrefix(vm.widget.widgetType);
+            console.log(vm.widget.type);
+            var prefix = WidgetService.getFilenamePrefix(vm.widget.type);
             console.log("prefix:");
             console.log(prefix);
             return prefix;

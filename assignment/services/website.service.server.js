@@ -2,9 +2,9 @@
  * Created by mayank on 11/5/16.
  */
 
-module.exports = function(app) {
+module.exports = function(app, model) {
 
-    var websites =   [
+  /*  var websites =   [
         { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
         { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
         { "_id": "234", "name": "Tweeter",     "developerId": "456", "description": "Lorem" },
@@ -13,20 +13,19 @@ module.exports = function(app) {
         { "_id": "678", "name": "Checkers",    "developerId": "123", "description": "Lorem" },
         { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" }
     ];
-
+*/
 
     app.post("/api/user/:userId/website", createWebsite);
     app.get("/api/user/:userId/website", findAllWebsitesForUser);
     app.get("/api/website/:websiteId", findWebsiteById);
     app.put('/api/website/:websiteId', updateWebsite);
-    app.delete("/api/website/:websiteId", deleteWebsite);
-
+    app.delete("/api/user/:userId/website/:websiteId", deleteWebsite);
 
     function createWebsite(req, res)
     {
-        var newWid;
+       /* var newWid;
         var website = req.body;
-        website.developerId = req.params.userId;
+        website.developerId = req.params.userId;*/
             /*todo*/ //check delete website bug post that
         /*do {
             newWid = getRandomInt(0, 1000).toString();
@@ -52,26 +51,54 @@ module.exports = function(app) {
             }
         }while(1);*/
 
-        website._id = 500;
-        websites.push(website);
-        res.json(websites);
+        var uid = req.params.userId;
+
+        var website = req.body;
+        console.log(uid);
+        console.log(website);
+        model
+            .websiteModel
+            .createWebsite(uid, website)
+            .then(
+                function(newWebsite) {
+                    console.log("newWebsite");
+                    console.log(newWebsite);
+                    res.json(newWebsite);
+                },
+                function(err) {
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
     function findAllWebsitesForUser(req, res)
     {
-        var uid = req.params.userId;
+        /*var uid = req.params.userId;
         var result = [];
         for(var w in websites) {
             if(websites[w].developerId == uid) {
                 result.push(websites[w]);
             }
         }
-        res.json(result);
+        res.json(result);*/
+
+        var userId = req.params.userId;
+        model
+            .websiteModel
+            .findAllWebsitesForUser(userId)
+            .then(
+                function(response) {
+                    res.send(response.websites);
+                },
+                function(err) {
+                    res.sendStatus(400).send(error);
+                }
+            )
     }
 
     function findWebsiteById(req, res)
     {
-        var wid = req.params.websiteId;
+        /*var wid = req.params.websiteId;
         for (var w in websites)
         {
             website = websites[w];
@@ -82,14 +109,32 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.json('0');
+        res.json('0');*/
+
+        var websiteId = req.params.websiteId;
+        model
+            .websiteModel
+            .findWebsiteById(websiteId)
+            .then(
+                function(website) {
+                    if (website) {
+                        res.send(website);
+                    }
+                    else {
+                        res.send('0');
+                    }
+                },
+                function(err) {
+                    res.sendStatus(400).send(err);
+                }
+            )
     }
 
     function updateWebsite(req, res)
     {
         var wid = req.params.websiteId;
         var website = req.body;
-        var webIndex = findWebIndexById(wid);
+        /*var webIndex = findWebIndexById(wid);
         if( webIndex === -1)
         {
             res.send('0');
@@ -100,14 +145,29 @@ module.exports = function(app) {
             websites[webIndex] = website;
             res.json(websites[webIndex]);
             return;
-        }
+        }*/
+        model
+            .websiteModel
+            .updateWebsite(website, wid)
+            .then(
+                function (status) {
+                    res.sendStatus(200);
+                },
+                function(err) {
+                    res.sendStatus(400).send(err);
+                }
+            );
     }
 
     function deleteWebsite(req, res)
     {
         var wid = req.params.websiteId;
-        var webIndex = findWebIndexById(wid);
-        if(webIndex === -1)
+        var uid = req.params.userId;
+        console.log("wid uid");
+        console.log(wid);
+        console.log(uid);
+        //var webIndex = findWebIndexById(wid);
+        /*if(webIndex === -1)
         {
             res.send('0');
             return;
@@ -117,7 +177,18 @@ module.exports = function(app) {
             websites.splice(webIndex, 1);
             res.send(200);
             return;
-        }
+        }*/
+        model
+            .websiteModel
+            .deleteWebsite(uid, wid)
+            .then(
+                function(status) {
+                    res.sendStatus(200);
+                },
+                function(err) {
+                    res.sendStatus(400).send(err);
+                }
+            );
     }
 
 

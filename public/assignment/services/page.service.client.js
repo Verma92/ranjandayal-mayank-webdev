@@ -98,9 +98,10 @@
             }*/
         }
 
-        function deletePage(pageId)
+        function deletePage(pageId, websiteId)
         {
-            var url = "/api/page/"+pageId;
+            //api/website/:websiteId/page/:pageId
+            var url = "/api/website/" + websiteId +"/page/"+ pageId;
             return $http.delete(url);
 
            /* var pageIndex = findPageIndexById(pageId);
