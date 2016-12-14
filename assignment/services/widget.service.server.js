@@ -70,6 +70,8 @@ module.exports = function(app, model) {
     {
         var widget = req.body;
         var pageId = req.params.pageId;
+        console.log("widget");
+        console.log(widget);
         /*widget.pageId = pageId;
         var newWid;
         do {
