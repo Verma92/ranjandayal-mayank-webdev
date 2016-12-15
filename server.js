@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: true }));*/
 app.use(express.static(__dirname + '/public'));
 
 // adding configurations for client and server side
-/*require ("./test/app.js")(app);*/
+//require ("./test/app.js")(app);
 require("./assignment/app")(app);
 
 // configure port for running the project

@@ -4,7 +4,12 @@
 module.exports = function ()
 {
     var mongoose = require('mongoose');
-    mongoose.connect('mongodb://127.0.0.1:27017/wam-fall-2016');
+    mongoose.Promise = global.Promise;
+    var connectionString = 'mongodb://127.0.0.1:27017/webdev-mayank';
+    if(process.env.MLAB_USERNAME) {
+        connectionString = 'mongodb://mayank:mayank@ds033076.mlab.com:33076/webdev-mayank';
+    }
+    mongoose.connect(connectionString);
 
     var userModel = require("./user/user.model.server")();
     var websiteModel = require("./website/website.model.server")();
