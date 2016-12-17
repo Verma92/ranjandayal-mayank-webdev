@@ -7,6 +7,13 @@ module.exports = function(app, model) {
     var LocalStrategy = require('passport-local').Strategy;
     var auth = authorized;
     var bcrypt = require("bcrypt-nodejs");
+    var FacebookStrategy = require('passport-facebook').Strategy;
+
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    };
 
    /* var users =   [
         {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
@@ -29,6 +36,13 @@ module.exports = function(app, model) {
     app.post('/api/logout', logout);
     app.post('/api/register', register);
     app.get ('/api/loggedin', loggedin);
+
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/#/profile',
+            failureRedirect: '/#/login'
+        }));
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     /*app.post('/api/user', auth, createUser);
     app.get('/api/loggedin', loggedin);
     app.get('/api/user', auth, findAllUsers);
@@ -38,10 +52,46 @@ module.exports = function(app, model) {
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
     /*
     * authentication api implementation
     * */
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByFacebookId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var names = profile.displayName.split(" ");
+                        var newFacebookUser = {
+                            lastName:  names[1],
+                            firstName: names[0],
+                            email:     profile.emails ? profile.emails[0].value:"",
+                            facebook: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return userModel.createUser(newFacebookUser);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
 
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
@@ -182,6 +232,7 @@ module.exports = function(app, model) {
 
     function createUser(req, res) {
         var user = req.body;
+       // user.password = bcrypt.hashSync(user.password);
         // user._id = (new Date()).getTime();
         // users.push(user);
         model

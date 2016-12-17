@@ -21,18 +21,19 @@
         init();
 
 
-        function login(user) {
+        /*function login(user) {
             UserService
                 .login(user)
                 .then(
                     function(response) {
                         var user = response.data;
                         console.log(response.data);
+                        console.log("error");
                         $rootScope.currentUser = user;
                         $location.url("/user/"+user._id);
                     })
         }
-
+*/
         function logout() {
             UserService
                 .logout()
@@ -43,8 +44,10 @@
                     })
         }
 
-            /* function login(username, password)
+             function login(user)
              {
+                 username = user.username;
+                 password = user.password;
                  var promise= UserService.findUsersByCredentials(username, password);
 
                  promise.success(function(user){
@@ -55,7 +58,7 @@
                          $location.url("/user/" + user._id);
                      }
                  });
-             }*/
+             }
     }
 
     function RegisterController($routeParams, $location, UserService, $rootScope)
@@ -67,7 +70,7 @@
             vm.registerUser = registerUser;
         }
         init();
-
+/*
         function registerUser(username, password) {
             var user = {username: '', password:''};
             user.username = username;
@@ -83,9 +86,9 @@
                         $rootScope.currentUser = user;
                         $location.url("/user/"+user._id);
                     })
-        }
+        }*/
 
-     /*   function registerUser(username, password) {
+        function registerUser(username, password) {
             console.log("register controller");
             console.log(username);
             console.log(password);
@@ -100,7 +103,7 @@
                 .error(function (error) {
 
                 });
-        }*/
+        }
 
 /*        function registerUser(user)
         {
