@@ -21,19 +21,25 @@
         init();
 
 
-        /*function login(user) {
-            UserService
-                .login(user)
-                .then(
-                    function(response) {
-                        var user = response.data;
-                        console.log(response.data);
-                        console.log("error");
-                        $rootScope.currentUser = user;
-                        $location.url("/user/"+user._id);
-                    })
+        function login(user) {
+            console.log(user.username);
+            if(user.username === "" || user.password === ""){
+                vm.alert = "Username and Password are required";
+            }
+            else {
+                UserService
+                    .login(user)
+                    .then(
+                        function (response) {
+                            var user = response.data;
+                            console.log(response.data);
+                            console.log("error");
+                            $rootScope.currentUser = user;
+                            $location.url("/user/" + user._id);
+                        })
+            }
         }
-*/
+
         function logout() {
             UserService
                 .logout()
@@ -44,7 +50,7 @@
                     })
         }
 
-             function login(user)
+            /* function login(user)
              {
                  username = user.username;
                  password = user.password;
@@ -58,7 +64,7 @@
                          $location.url("/user/" + user._id);
                      }
                  });
-             }
+             }*/
     }
 
     function RegisterController($routeParams, $location, UserService, $rootScope)
@@ -69,26 +75,38 @@
         {
             vm.registerUser = registerUser;
         }
+
         init();
-/*
-        function registerUser(username, password) {
+
+        function registerUser(username, password, verifyPassword) {
             var user = {username: '', password:''};
             user.username = username;
             user.password = password;
             console.log("user at registration controller");
             console.log(user);
 
-            UserService
-                .register(user)
-                .then(
-                    function(response) {
-                        var user = response.data;
-                        $rootScope.currentUser = user;
-                        $location.url("/user/"+user._id);
-                    })
-        }*/
+            if(typeof user.username === "undefined" || typeof user.password === "undefined" || verifyPassword === ""){
+                vm.alert = "All fields are required";
+            }
+            else{
+                if(user.password !== verifyPassword){
+                    vm.alert = "Passwords do not match !";
+                }
 
-        function registerUser(username, password) {
+                else{
+                    UserService
+                        .register(user)
+                        .then(
+                            function(response) {
+                                var user = response.data;
+                                $rootScope.currentUser = user;
+                                $location.url("/user/"+user._id);
+                            })
+                }
+            }
+        }
+
+        /*function registerUser(username, password) {
             console.log("register controller");
             console.log(username);
             console.log(password);
@@ -104,7 +122,7 @@
 
                 });
         }
-
+*/
 /*        function registerUser(user)
         {
             console.log("user at controller");
