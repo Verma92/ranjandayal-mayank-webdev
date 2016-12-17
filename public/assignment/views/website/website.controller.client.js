@@ -29,7 +29,7 @@
                         }
                     })
                     .error (function() {
-                        vm.alert = "Could not retrieve websites list";
+                        //vm.alert = "Could not retrieve websites list";
                     });
 
                 promise = WebsiteService.findWebsitesByUser(userId);
@@ -41,7 +41,7 @@
                         }
                     })
                     .error (function() {
-                        vm.alert = "Could not retrieve website";
+                       // vm.alert = "Could not retrieve website";
                     });
 
             }
@@ -71,8 +71,14 @@
 
             function updateWebsite(website)
             {
-                WebsiteService.updateWebsite(vm.websiteId, website);
-                $location.url("/user/" + vm.userId + "/website");
+                console.log(website.name);
+                if(typeof website.name === "undefined" || website.name === "") {
+                    vm.alert = "Name is required !"
+                }
+                else{
+                    WebsiteService.updateWebsite(vm.websiteId, website);
+                    $location.url("/user/" + vm.userId + "/website");
+                }
             }
 
             function deleteWebsite()
@@ -99,7 +105,7 @@
                          }
                         })
                     .error (function(){
-                        vm.alert = "Could not retrieve websites list";
+                        //vm.alert = "Could not retrieve websites list";
                     })
             }
             init();
@@ -131,7 +137,7 @@
                         }
                     })
                     .error (function(){
-                        vm.alert = "Could not retrieve websites list";
+                       // vm.alert = "Could not retrieve websites list";
                     })
             }
 
@@ -147,12 +153,17 @@
 
             function createWebsite(website)
             {
-                var pro = WebsiteService.createWebsite(vm.userId, website);
-                console.log("website created !");
-                pro.success(function (web) {
-                    console.log(web);
-                })
-                $location.url("/user/" + vm.userId + "/website");
+                if(typeof website === "undefined") {
+                    vm.alert = "Name is required !"
+                }
+                else{
+                    var pro = WebsiteService.createWebsite(vm.userId, website);
+                    console.log("website created !");
+                    pro.success(function (web) {
+                        console.log(web);
+                    })
+                    $location.url("/user/" + vm.userId + "/website");
+                }
             }
         }
 })();
