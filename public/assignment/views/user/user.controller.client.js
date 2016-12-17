@@ -9,29 +9,53 @@
         .controller("RegisterController", RegisterController)
         .controller("ProfileController", ProfileController);
 
-    function LoginController($location, UserService) {
+    function LoginController($location, UserService, $rootScope) {
 
         var vm = this;
 
         function init()
         {
             vm.login = login;
+            vm.logout = logout;
         }
         init();
 
-        function login(username, password)
-        {
-            var promise= UserService.findUsersByCredentials(username, password);
 
-            promise.success(function(user){
-                if(user === '0') {
-                    vm.alert = "Unable to login";
-                } else {
-                    console.log("inside login controller "+user.username);
-                    $location.url("/user/" + user._id);
-                }
-            });
+        function login(user) {
+            UserService
+                .login(user)
+                .then(
+                    function(response) {
+                        var user = response.data;
+                        console.log(response.data);
+                        $rootScope.currentUser = user;
+                        $location.url("/user/"+user._id);
+                    })
         }
+
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function(response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/");
+                    })
+        }
+
+            /* function login(username, password)
+             {
+                 var promise= UserService.findUsersByCredentials(username, password);
+
+                 promise.success(function(user){
+                     if(user === '0') {
+                         vm.alert = "Unable to login";
+                     } else {
+                         console.log("inside login controller "+user.username);
+                         $location.url("/user/" + user._id);
+                     }
+                 });
+             }*/
     }
 
     function RegisterController($routeParams, $location, UserService)
@@ -45,6 +69,23 @@
         init();
 
         function registerUser(username, password) {
+            var user = {username: '', password:''};
+            user.username = username;
+            user.password = password;
+            console.log("user at registration controller");
+            console.log(user);
+
+            UserService
+                .register(user)
+                .then(
+                    function(response) {
+                        var user = response.data;
+                        $rootScope.currentUser = user;
+                        $location.url("/user/"+user._id);
+                    })
+        }
+
+     /*   function registerUser(username, password) {
             console.log("register controller");
             console.log(username);
             console.log(password);
@@ -59,7 +100,7 @@
                 .error(function (error) {
 
                 });
-        }
+        }*/
 
 /*        function registerUser(user)
         {

@@ -4,6 +4,7 @@
 module.exports = function(app, model) {
 
     var passport = require('passport');
+    var LocalStrategy = require('passport-local').Strategy;
     var auth = authorized;
 
    /* var users =   [
@@ -26,19 +27,24 @@ module.exports = function(app, model) {
     app.post('/api/login', passport.authenticate('local'), login);
     app.post('/api/logout', logout);
     app.post('/api/register', register);
+    app.get ('/api/loggedin', loggedin);
     /*app.post('/api/user', auth, createUser);
     app.get('/api/loggedin', loggedin);
     app.get('/api/user', auth, findAllUsers);
     app.put('/api/user/:id', auth, updateUser);
     app.delete('/api/user/:id', auth, deleteUser);
 */
-   // passport.use(new LocalStrategy(localStrategy));
+    passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
     /*
     * authentication api implementation
     * */
+
+    function loggedin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
 
     function login(req, res) {
         var user = req.user;
@@ -51,7 +57,23 @@ module.exports = function(app, model) {
     }
 
     function register(req, res) {
-
+        var user = req.body;
+        model
+            .userModel
+            .createUser(user)
+            .then(
+                function(user){
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                }
+        );
     }
 
     function authorized (req, res, next) {
@@ -80,6 +102,9 @@ module.exports = function(app, model) {
     }
 
     function localStrategy(username, password, done) {
+        console.log("username pass at localstrategy");
+        console.log(username);
+        console.log(password);
         model
             .userModel
             .findUserByCredentials(username, password)
