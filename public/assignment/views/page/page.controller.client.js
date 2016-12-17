@@ -35,10 +35,17 @@
 
         function updatePage()
         {
-            console.log("update page controller");
-            console.log(vm.page);
-            PageService.updatePage(pageId, vm.page);
-            $location.url("/user/"+userId+"/website/"+websiteId+"/page");
+            if(typeof page === "undefined") {
+                vm.alert = "Name is required !"
+            }
+            else {
+                i
+                    console.log("update page controller");
+                    console.log(vm.page);
+                    PageService.updatePage(pageId, vm.page);
+                    $location.url("/user/" + userId + "/website/" + websiteId + "/page");
+
+            }
         }
 
         function deletePage()
@@ -64,8 +71,18 @@
 
         function createPage(page)
         {
-            PageService.createPage(websiteId, page);
-            $location.url("/user/"+userId+"/website/"+websiteId+"/page");
+            if(typeof page === "undefined") {
+                vm.alert = "Name is required !"
+            }
+            else{
+                if(typeof page.name === "undefined"){
+                    vm.alert = "Name is required !"
+                }
+                else{
+                    PageService.createPage(websiteId, page);
+                    $location.url("/user/"+userId+"/website/"+websiteId+"/page");
+                }
+            }
         }
     }
 

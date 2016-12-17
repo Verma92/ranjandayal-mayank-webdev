@@ -36,6 +36,10 @@
             <input ng-model="model.page.description" type="text" class="form-control" id="title" placeholder="Page Title">
         </div>
 
+        <div ng-show="model.alert" class="alert alert-danger" role="alert">
+            {{model.alert}}
+        </div>
+
         <a ng-click="model.deletePage()" class="btn btn-danger  btn-block">Delete</a>
 
     </form>
