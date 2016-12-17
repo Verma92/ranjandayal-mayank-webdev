@@ -58,7 +58,7 @@
              }*/
     }
 
-    function RegisterController($routeParams, $location, UserService)
+    function RegisterController($routeParams, $location, UserService, $rootScope)
     {
         var vm = this;
 
