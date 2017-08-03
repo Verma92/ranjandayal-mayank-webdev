@@ -41,7 +41,5 @@ app.use(express.static(__dirname + '/public'));
 require("./assignment/app")(app);
 
 // configure port for running the project
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-
-app.listen(port, ipaddress);
+var port = process.env.PORT || 3000;
+app.listen(port);

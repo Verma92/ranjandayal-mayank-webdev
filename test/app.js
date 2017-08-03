@@ -9,26 +9,8 @@ module.exports = function(app)
     //'mongodb://username:password@ds033076.mlab.com:33076/webdev-mayank';
 
     if(process.env.MLAB_USERNAME) {
-        /*connectionString = "mongodb://"+ process.env.MLAB_USERNAME + ":" +
-            process.env.MLAB_PASSWORD + "@" +
-            process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-            process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-            process.env.OPENSHIFT_APP_NAME;*/
 
-        console.log("env variable");
-        console.log(process.env.MLAB_USERNAME);
-
-        if(process.env.MLAB_USERNAME) {
-            console.log("env variable");
-            console.log(process.env.MLAB_USERNAME);
-            connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-                process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-                process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-                process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-                process.env.OPENSHIFT_APP_NAME;
-        }
-
-        connectionString = 'mongodb://mayank:mayank@ds033076.mlab.com:33076/webdev-mayank';
+        connectionString = 'mongodb://'+process.env.MLAB_USERNAME+':'+MLAB_PASSWORD+'@ds033076.mlab.com:33076/webdev-mayank';
     }
 
     var mongoose = require("mongoose");
