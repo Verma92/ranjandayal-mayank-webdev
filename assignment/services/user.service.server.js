@@ -52,7 +52,7 @@ module.exports = function(app, model) {
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+   // passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
     /*
     * authentication api implementation
