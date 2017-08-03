@@ -23,21 +23,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // install, load, and configure body parser module
-
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// install, load, and configure body parser module
-/*var bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));*/
 
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
 // adding configurations for client and server side
-//require ("./test/app.js")(app);
 require("./assignment/app")(app);
 
 // configure port for running the project
