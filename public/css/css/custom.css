@@ -1,0 +1,44 @@
+.navbar-custom .navbar-brand {
+    color: #fff;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.btn-xl {
+    color: #fff;
+    background-color: Transparent;
+    border-color: #fff;
+    outline:none;
+    background-repeat: no-repeat;
+    cursor:pointer;
+    overflow: hidden;
+}
+
+.btn-xl:hover{
+    background: Transparent;
+}
+
+.text-primary, a {
+    color: black;
+}
+
+.btn-primary, .btn-xl, h1, h2, h3, h4, h5, h6 {
+    font-weight: lighter;
+}
+
+header .intro-text .intro-heading {
+    font-weight: lighter;
+}
+
+.a::selection {
+    background-color: #ffffff;
+}
+
+section#contact {
+    background-color: #9e9e9e;
+}
+
+section#contact .section-heading {
+    color: #000;
+}
+
+
