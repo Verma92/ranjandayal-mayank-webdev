@@ -1,6 +1,6 @@
 .navbar-custom .navbar-brand {
     color: #fff;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Helvetica;
 }
 
 .btn-xl {
@@ -27,6 +27,7 @@
 
 header .intro-text .intro-heading {
     font-weight: lighter;
+    font-family: Helvetica;
 }
 
 .a::selection {
@@ -40,5 +41,12 @@ section#contact {
 section#contact .section-heading {
     color: #000;
 }
+
+header .intro-text .intro-lead-in {
+    font-family: Helvetica Neue;
+    font-weight: lighter;
+    font-style: normal;
+}
+
 
 
