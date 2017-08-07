@@ -21,11 +21,16 @@
             updateUser: updateUser,
             deleteUser: deleteUser,
             login: login,
+            loggedin: loggedin,
             logout: logout,
             register: register
         };
 
         return api;
+
+        function loggedin() {
+            return $http.post("/api/loggedin");
+        }
 
         function register(user) {
             return $http.post("/api/register", user);

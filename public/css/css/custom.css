@@ -48,5 +48,12 @@ header .intro-text .intro-lead-in {
     font-style: normal;
 }
 
+.timeline>li .timeline-image {
+    background-color: cornflowerblue;
+}
+
+.navbar-custom .navbar-nav>.active>a {
+    background-color: cornflowerblue;
+}
 
 

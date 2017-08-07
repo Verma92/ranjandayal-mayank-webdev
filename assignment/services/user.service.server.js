@@ -35,8 +35,7 @@ module.exports = function(app, model) {
     app.post('/api/login', passport.authenticate('local'), login);
     app.post('/api/logout', logout);
     app.post('/api/register', register);
-    app.get ('/api/loggedin', loggedin);
-
+    app.post ('/api/loggedin', loggedin);
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
             successRedirect: '/#/profile',

@@ -16,7 +16,6 @@
         function init()
         {
             vm.login = login;
-            vm.logout = logout;
         }
         init();
 
@@ -39,32 +38,6 @@
                         })
             }
         }
-
-        function logout() {
-            UserService
-                .logout()
-                .then(
-                    function(response) {
-                        $rootScope.currentUser = null;
-                        $location.url("/");
-                    })
-        }
-
-            /* function login(user)
-             {
-                 username = user.username;
-                 password = user.password;
-                 var promise= UserService.findUsersByCredentials(username, password);
-
-                 promise.success(function(user){
-                     if(user === '0') {
-                         vm.alert = "Unable to login";
-                     } else {
-                         console.log("inside login controller "+user.username);
-                         $location.url("/user/" + user._id);
-                     }
-                 });
-             }*/
     }
 
     function RegisterController($routeParams, $location, UserService, $rootScope)
@@ -162,14 +135,13 @@
         };*/
     }
 
-    function ProfileController($routeParams, $location, UserService)
+    function ProfileController($routeParams, $location, UserService, $rootScope)
     {
-        console.log($routeParams);
         var vm = this;
         var userId = $routeParams.uid;
         vm.userId = userId;
         vm.updateProfile = updateProfile;
-        console.log(userId);
+        vm.logout = logout;
 
         function init()
         {
@@ -197,6 +169,16 @@
                     $location.url("/user/"+vm.userId);
                 }
             });
+        }
+
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function(response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/");
+                    })
         }
 /*
         function updateProfile()
