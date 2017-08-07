@@ -78,67 +78,12 @@
                 }
             }
         }
-
-        /*function registerUser(username, password) {
-            console.log("register controller");
-            console.log(username);
-            console.log(password);
-            UserService
-                .createUser(username, password)
-                .success(function(user){
-                    console.log("res user");
-                    console.log(user);
-                    userId = user._id;
-                    $location.url("/user/"+userId);
-                })
-                .error(function (error) {
-
-                });
-        }
-*/
-/*        function registerUser(user)
-        {
-            console.log("user at controller");
-            console.log(user);
-            UserService
-                .createUser(user)
-                .success(function(newUser){
-                    console.log("new user");
-                    console.log(newUser);
-                    $location.url("/user/"+newUser._id);
-                })
-                .error(function (error) {
-
-                });
-            /!*var promise = UserService.createUser(user);
-
-            promise.success(function(updatedUser) {
-                console.log("update user at controller");
-                console.log(updatedUser);
-                if (updatedUser === '0') {
-                    vm.alert = "Couldn't create user";
-                } else {
-                    $location.url("/user/" + updatedUser._id);
-                }
-            });*!/
-        };*/
-
-       /* function register(username, password) {
-            UserService
-                .createUser(user)
-                .success(function(user){
-                    $location.url("/user/"+user._id);
-                })
-                .error(function (error) {
-
-                });
-        };*/
     }
 
-    function ProfileController($routeParams, $location, UserService, $rootScope)
+    function ProfileController($routeParams, $location, UserService, $rootScope, loggedin)
     {
         var vm = this;
-        var userId = $routeParams.uid;
+        var userId = $rootScope.loggedUser._id;
         vm.userId = userId;
         vm.updateProfile = updateProfile;
         vm.logout = logout;
@@ -180,14 +125,6 @@
                         $location.url("/");
                     })
         }
-/*
-        function updateProfile()
-        {
-            UserService.updateUser(user);
-            $location.url("/user/"+vm.userId);
-            console.log(user);
-            //$location.url("/user/" + vm.userId + "/website");
-        }*/
     };
 
 })();

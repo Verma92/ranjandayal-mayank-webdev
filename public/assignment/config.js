@@ -117,14 +117,15 @@
             });
 
             // functions to check if the user is already logged in
-            function checkLoggedin($q, UserService, $location) {
+            function checkLoggedin($q, UserService, $location, $rootScope) {
                 var deferred = $q.defer();
                 UserService
                     .loggedin()
                     .success(
                         function (user) {
                             if (user != '0') {
-                                deferred.resolve();
+                                $rootScope.loggedUser = user;
+                                deferred.resolve(user); // user is binded to loggedin here
                             } else {
                                 deferred.reject();
                                 $location.url("/login");

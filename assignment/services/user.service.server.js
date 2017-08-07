@@ -10,17 +10,10 @@ module.exports = function(app, model) {
     var FacebookStrategy = require('passport-facebook').Strategy;
 
     var facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID,
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+        clientID     : '1582783788403749',
+        clientSecret : 'b5a36d13e14c1e624092f7fb3a89a6bc',
+        callbackURL  : '/auth/facebook/callback'
     };
-
-   /* var users =   [
-        {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-        {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-        {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-        {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-    ];*/
 
     app.post('/api/user', createUser);
     app.get('/api/user?username=username', findUserByUsername);
@@ -38,8 +31,8 @@ module.exports = function(app, model) {
     app.post ('/api/loggedin', loggedin);
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect: '/#/profile',
-            failureRedirect: '/#/login'
+            successRedirect: '/assignment/#/profile',
+            failureRedirect: '/assignment/#/login'
         }));
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     /*app.post('/api/user', auth, createUser);
@@ -51,14 +44,14 @@ module.exports = function(app, model) {
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
-   // passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
     /*
     * authentication api implementation
     * */
 
     function facebookStrategy(token, refreshToken, profile, done) {
-        userModel
+        model.userModel
             .findUserByFacebookId(profile.id)
             .then(
                 function(user) {
@@ -75,7 +68,7 @@ module.exports = function(app, model) {
                                 token: token
                             }
                         };
-                        return userModel.createUser(newFacebookUser);
+                        return model.userModel.createUser(newFacebookUser);
                     }
                 },
                 function(err) {
