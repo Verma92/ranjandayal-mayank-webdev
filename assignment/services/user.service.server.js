@@ -10,9 +10,9 @@ module.exports = function(app, model) {
     var FacebookStrategy = require('passport-facebook').Strategy;
 
     var facebookConfig = {
-        clientID     : '1582783788403749',
-        clientSecret : 'b5a36d13e14c1e624092f7fb3a89a6bc',
-        callbackURL  : '/auth/facebook/callback'
+        clientID     : process.env.FB_CLIENT_ID_WAM,
+        clientSecret : process.env.FB_CLIENT_SECRET_WAM,
+        callbackURL  : process.env.FB_CALL_BACK_URL_WAM
     };
 
     app.post('/api/user', createUser);
