@@ -35,12 +35,6 @@ module.exports = function(app, model) {
             failureRedirect: '/assignment/#/login'
         }));
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-    /*app.post('/api/user', auth, createUser);
-    app.get('/api/loggedin', loggedin);
-    app.get('/api/user', auth, findAllUsers);
-    app.put('/api/user/:id', auth, updateUser);
-    app.delete('/api/user/:id', auth, deleteUser);
-*/
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
@@ -85,10 +79,13 @@ module.exports = function(app, model) {
             );
     }
 
+    // function to check if the user is already logged in
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 
+    // function executed after successful local strategy execution
+    // return the user
     function login(req, res) {
         var user = req.user;
         res.json(user);
