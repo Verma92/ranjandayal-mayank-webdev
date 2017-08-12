@@ -62,5 +62,9 @@ header .intro-text .intro-lead-in {
     font-style: normal;
 }
 
+.btn-hidden-border {
+    border: hidden;
+}
+
 
 
