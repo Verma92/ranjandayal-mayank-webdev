@@ -1,4 +1,4 @@
-# Portfolio & WebApp Maker [![Node.js](https://cdn.rawgit.com/aleen42/badges/master/src/node.svg)](#) [![angular](https://rawgit.com/aleen42/badges/master/src/angular.svg)](https://cdn.rawgit.com/aleen42/badges/master/src/angular.svg) [![npm](https://rawgit.com/aleen42/badges/master/src/npm.svg)](https://cdn.rawgit.com/aleen42/badges/master/src/npm.svg) ![Heroku](http://heroku-badge.herokuapp.com/?app=mayankrd&root=/)
+# Portfolio & WebApp Maker [![Node.js](https://cdn.rawgit.com/aleen42/badges/master/src/node.svg)](#) [![angular](https://rawgit.com/aleen42/badges/master/src/angular.svg)](#) [![npm](https://rawgit.com/aleen42/badges/master/src/npm.svg)](#) [![Heroku](http://heroku-badge.herokuapp.com/?app=mayankrd&root=/)](#)
 
 Portfolio web page and MEAN stack based WebApp Maker app
 
